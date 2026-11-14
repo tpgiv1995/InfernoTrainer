@@ -1,6 +1,6 @@
 "use strict";
 
-import { ControlPanelController, Settings, Trainer, V3_PRAYER_LAYOUT, World } from "osrs-sdk";
+import { ControlPanelController, Settings, Trainer, V3_INFERNO_PRAYER_LAYOUT, World } from "osrs-sdk";
 import { InfernoSettings } from "../content/inferno/js/InfernoSettings";
 import { V3Settings } from "./V3Settings";
 import { describeSpawn, parseSpawnLink, SpawnLinkError, spawnToTrainerPath } from "./spawnLink";
@@ -51,12 +51,26 @@ export class V3Shell {
   static init(ctx: ShellContext) {
     V3Shell.ctx = ctx;
     V3Settings.read();
+    V3Shell.seedKitDefaults();
     injectStyle();
     buildChrome();
     buildSetup();
     buildDeath();
     Trainer.onPlayerDeath(() => V3Shell.showDeath());
     Trainer.onReset(() => V3Shell.hideDeath());
+  }
+
+  /**
+   * The V3 Inferno loadout and prayer book (Mystic Vigour, Deadeye) are the defaults. Settings saved by an earlier
+   * visit would keep the old ones, so each browser is switched once; after that the player's own choices stand.
+   */
+  static seedKitDefaults() {
+    if (V3Settings.state.kitSeeded) return;
+    Settings.loadout = "v3_inferno";
+    if (Settings.prayerLayout !== null) Settings.prayerLayout = [...V3_INFERNO_PRAYER_LAYOUT];
+    Settings.persistToStorage();
+    V3Settings.state.kitSeeded = true;
+    V3Settings.persist();
   }
 
   /** Called once the engine has loaded everything. Opens the setup screen, or starts at once after a setup-driven reload. */
@@ -279,7 +293,7 @@ function buildSetup() {
     InfernoSettings.persistToStorage();
     V3Settings.state.fullscreenOnStart = fullscreen.box.checked;
     V3Settings.persist();
-    Settings.prayerLayout = stockPrayer.box.checked ? null : [...V3_PRAYER_LAYOUT];
+    Settings.prayerLayout = stockPrayer.box.checked ? null : [...V3_INFERNO_PRAYER_LAYOUT];
     Settings.persistToStorage();
     const wantedWave = waveInput.value === "" ? currentWave() : parseInt(waveInput.value, 10);
     const hasLink = linkSummary() !== null;

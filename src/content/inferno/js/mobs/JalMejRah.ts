@@ -1,6 +1,6 @@
 "use strict";
 
-import { Assets, RangedWeapon, Unit, AttackBonuses, ProjectileOptions, Player, Mob, Sound, UnitBonuses, GLTFModel, EntityNames } from "osrs-sdk";
+import { V3Rules, Assets, RangedWeapon, Unit, AttackBonuses, ProjectileOptions, Player, Mob, Sound, UnitBonuses, GLTFModel, EntityNames } from "osrs-sdk";
 
 import BatImage from "../../assets/images/bat.png";
 import BatSound from "../../assets/sounds/bat.ogg";
@@ -58,7 +58,7 @@ export class JalMejRah extends Mob {
         slash: 0,
         crush: 0,
         magic: 0,
-        range: 25,
+        range: V3Rules.calculator ? 30 : 25, // wiki value (calculator rules)
       },
       defence: {
         stab: 30,

@@ -19,3 +19,14 @@ describe("V3 shell settings", () => {
     expect(V3Settings.read().fullscreenOnStart).toBe(true);
   });
 });
+
+describe("V3 kit seeding", () => {
+  beforeEach(() => window.localStorage.clear());
+
+  test("kit defaults are not applied until the shell seeds them, and the flag survives a reload", () => {
+    expect(V3Settings.read().kitSeeded).toBe(false);
+    V3Settings.state.kitSeeded = true;
+    V3Settings.persist();
+    expect(V3Settings.read().kitSeeded).toBe(true);
+  });
+});

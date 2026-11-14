@@ -6,15 +6,19 @@ import {
   AncientStaff,
   AvasAccumulator,
   AvasAssembler,
+  AvernicTreadsPrEt,
+  BandosChestplate,
   BarrowsGloves,
   BastionPotion,
   BlackChinchompa,
+  BloodAncientSceptre,
   BlackDhideChaps,
   BlackDhideVambraces,
   Blowpipe,
   BowOfFaerdhinen,
   BrowserUtils,
   Chest,
+  ConflictionGauntlets,
   CrystalBody,
   CrystalHelm,
   CrystalLegs,
@@ -22,10 +26,14 @@ import {
   DagonhaiRobeTop,
   DevoutBoots,
   DiamondBoltsE,
+  DivineRangingPotion,
   DizanasQuiver,
   DragonArrows,
+  EyeOfAyak,
+  GuthansHelm,
   GuthixRobeTop,
   HolyBlessing,
+  ImbuedSaradominCape,
   InfernalCape,
   Item,
   ItemName,
@@ -35,24 +43,31 @@ import {
   KodaiWand,
   Legs,
   MagesBook,
+  MagusRing,
   MasoriBodyF,
   MasoriChapsF,
   MasoriMaskF,
   NecklaceOfAnguish,
+  NecklaceOfRupture,
+  OathplateLegs,
   OccultNecklace,
   PegasianBoots,
   Player,
+  PrayerRegenerationPotion,
   PrimordialBoots,
+  RadasBlessing4,
   RangerBoots,
   RingOfSufferingImbued,
   RobinHoodHat,
   RubyBoltsE,
   RuneCrossbow,
+  RunePouch,
   RuneKiteshield,
   SaradominBody,
   SaradominBrew,
   SaradominChaps,
   SaradominCoif,
+  SaturatedHeart,
   ScytheOfVitur,
   SlayerHelmet,
   StaminaPotion,
@@ -452,6 +467,59 @@ export class InfernoLoadout {
     };
   }
 
+  /**
+   * The V3 Inferno kit (the default). Tank set worn, wave-clearing with the Blood ancient sceptre's Ice Barrage
+   * autocast; the Eye of Ayak, the BowFa switch and the supplies sit in the inventory. Stats are the OSRS Wiki
+   * values the calculator (osrs-advisor/tools/inferno_gear.py) reads.
+   */
+  loadoutV3Inferno(): UnitOptions {
+    return {
+      equipment: {
+        weapon: new BloodAncientSceptre(),
+        offhand: new CrystalShield(),
+        helmet: new GuthansHelm(),
+        necklace: new OccultNecklace(),
+        cape: new ImbuedSaradominCape(),
+        ammo: new RadasBlessing4(),
+        chest: new BandosChestplate(),
+        legs: new OathplateLegs(),
+        feet: new AvernicTreadsPrEt(),
+        gloves: new ConflictionGauntlets(),
+        ring: new MagusRing(),
+      },
+      inventory: [
+        new BowOfFaerdhinen(),
+        new CrystalHelm(),
+        new CrystalBody(),
+        new CrystalLegs(),
+        new DizanasQuiver(),
+        new NecklaceOfRupture(),
+        new Blowpipe(),
+        new EyeOfAyak(),
+        new SaturatedHeart(),
+        new RunePouch(),
+        new SaradominBrew(),
+        new SaradominBrew(),
+        new SaradominBrew(),
+        new SaradominBrew(),
+        new SuperRestore(),
+        new SuperRestore(),
+        new SuperRestore(),
+        new SuperRestore(),
+        new SaradominBrew(),
+        new SaradominBrew(),
+        new SaradominBrew(),
+        new SuperRestore(),
+        new SuperRestore(),
+        new SuperRestore(),
+        new PrayerRegenerationPotion(),
+        new PrayerRegenerationPotion(),
+        new PrayerRegenerationPotion(),
+        new DivineRangingPotion(),
+      ],
+    };
+  }
+
   findItemByName(list: Item[], name: ItemName) {
     return indexOf(map(list, "itemName"), name);
   }
@@ -492,6 +560,9 @@ export class InfernoLoadout {
   getLoadout(): UnitOptions {
     let loadout: UnitOptions;
     switch (this.loadoutType) {
+      case "v3_inferno":
+        // The kit is the same at every wave; the player swaps to the BowFa set themselves.
+        return this.loadoutV3Inferno();
       case "max_tbow_speed":
         loadout = this.loadoutMaxTbowSpeedrunner();
         break;

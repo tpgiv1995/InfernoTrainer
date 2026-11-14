@@ -1,6 +1,6 @@
 "use strict";
 
-import { Assets, MagicWeapon, Unit, Sound, Projectile, Mob, Region, UnitOptions, ImageLoader, Location, Viewport, UnitTypes, UnitBonuses, Model, GLTFModel, EntityNames, Trainer, Settings } from "osrs-sdk";
+import { V3Rules, Assets, MagicWeapon, Unit, Sound, Projectile, Mob, Region, UnitOptions, ImageLoader, Location, Viewport, UnitTypes, UnitBonuses, Model, GLTFModel, EntityNames, Trainer, Settings } from "osrs-sdk";
 
 import ZukImage from "../../assets/images/TzKal-Zuk.png";
 import { InfernoSettings } from "../InfernoSettings";
@@ -239,7 +239,7 @@ export class TzKalZuk extends Mob {
     this.stats = {
       attack: 350,
       strength: 600,
-      defence: 234,
+      defence: V3Rules.calculator ? 260 : 234, // wiki value (calculator rules)
       range: 400,
       magic: 150,
       hitpoint: 1200,

@@ -1,5 +1,5 @@
 "use strict";
-import { Assets, Mob, MeleeWeapon, MagicWeapon, Sound, RangedWeapon, UnitBonuses, Random, AttackIndicators, Unit, Viewport, GLTFModel, EntityNames, Trainer } from "osrs-sdk";
+import { V3Rules, Assets, Mob, MeleeWeapon, MagicWeapon, Sound, RangedWeapon, UnitBonuses, Random, AttackIndicators, Unit, Viewport, GLTFModel, EntityNames, Trainer } from "osrs-sdk";
 
 import BlobImage from "../../assets/images/blob.png";
 import BlobSound from "../../assets/sounds/blob.ogg";
@@ -61,7 +61,7 @@ export class JalAk extends Mob {
         slash: 0,
         crush: 0,
         magic: 45,
-        range: 40,
+        range: V3Rules.calculator ? 45 : 40, // wiki value (calculator rules)
       },
       defence: {
         stab: 25,

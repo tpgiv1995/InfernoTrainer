@@ -1,6 +1,6 @@
 "use strict";
 
-import { Assets, Mob, EntityNames, MeleeWeapon, Sound, UnitBonuses, Location, Random, Collision, UnitTypes, Player, GLTFModel } from "osrs-sdk";
+import { V3Rules, Assets, Mob, EntityNames, MeleeWeapon, Sound, UnitBonuses, Location, Random, Collision, UnitTypes, Player, GLTFModel } from "osrs-sdk";
 
 import MeleerImage from "../../assets/images/meleer.png";
 import MeleerSound from "../../assets/sounds/meleer.ogg";
@@ -64,7 +64,7 @@ export class JalImKot extends Mob {
         slash: 65,
         crush: 65,
         magic: 30,
-        range: 5,
+        range: V3Rules.calculator ? 50 : 5, // wiki value (calculator rules)
       },
       other: {
         meleeStrength: 40,

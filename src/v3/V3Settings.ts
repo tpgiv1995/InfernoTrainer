@@ -8,9 +8,11 @@ const KEY = "v3-inferno-sim:settings";
 
 export interface V3SettingsState {
   fullscreenOnStart: boolean;
+  /** True once the V3 Inferno loadout and prayer book have been made the default for this browser. */
+  kitSeeded: boolean;
 }
 
-const DEFAULTS: V3SettingsState = { fullscreenOnStart: true };
+const DEFAULTS: V3SettingsState = { fullscreenOnStart: true, kitSeeded: false };
 
 export class V3Settings {
   static state: V3SettingsState = { ...DEFAULTS };
@@ -21,6 +23,7 @@ export class V3Settings {
       const parsed = raw ? JSON.parse(raw) : {};
       V3Settings.state = {
         fullscreenOnStart: typeof parsed.fullscreenOnStart === "boolean" ? parsed.fullscreenOnStart : DEFAULTS.fullscreenOnStart,
+        kitSeeded: parsed.kitSeeded === true,
       };
     } catch {
       V3Settings.state = { ...DEFAULTS };

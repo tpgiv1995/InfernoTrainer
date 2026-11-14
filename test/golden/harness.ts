@@ -8,7 +8,7 @@
  */
 import { readFileSync } from "fs";
 import { join } from "path";
-import { Mob, Player, Random, Settings, Trainer, Viewport, World } from "osrs-sdk";
+import { Mob, Player, Random, Settings, Trainer, V3Rules, Viewport, World } from "osrs-sdk";
 import { InfernoRegion } from "../../src/content/inferno/js/InfernoRegion";
 import { InfernoSettings } from "../../src/content/inferno/js/InfernoSettings";
 
@@ -68,6 +68,8 @@ function snapshot(region: InfernoRegion, includePending = false): MobTick[] {
 }
 
 function startFlow(flow: Flow) {
+  // The traces come from upstream's formulas and monster stats: run the engine in legacy mode.
+  V3Rules.calculator = false;
   window.localStorage.clear();
   buildDom();
   const seeded = mulberry32(flow.seed);
@@ -92,7 +94,15 @@ function startFlow(flow: Flow) {
   Trainer.setPlayer(player);
   world.getReadyTimer = 0;
   if (flow.stand) player.location = { ...flow.stand };
-  return { region, world, player, restore: () => ((globalThis as any).__mathRandom = realMathRandom) };
+  return {
+    region,
+    world,
+    player,
+    restore: () => {
+      (globalThis as any).__mathRandom = realMathRandom;
+      V3Rules.calculator = true;
+    },
+  };
 }
 
 /** The mobs exactly as the URL placed them, before any tick. */
