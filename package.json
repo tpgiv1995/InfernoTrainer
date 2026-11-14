@@ -50,7 +50,7 @@
     "wrangler": "^4.112.0"
   },
   "dependencies": {
-    "osrs-sdk": "file:vendor/osrs-sdk-1667a7b.tgz",
+    "osrs-sdk": "file:vendor/osrs-sdk-12fc0d1.tgz",
     "three": "^0.163.0"
   },
   "engines": {

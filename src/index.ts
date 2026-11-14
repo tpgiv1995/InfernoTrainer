@@ -1,12 +1,15 @@
 "use strict";
 
-import { Settings, Region, World, Viewport, MapController, TileMarker, Assets, Location, Chrome, ImageLoader, Trainer, ControlPanelController } from "osrs-sdk";
+import { CacheRender, Settings, Region, World, Viewport, MapController, TileMarker, Assets, Location, Chrome, ImageLoader, Trainer, ControlPanelController } from "osrs-sdk";
 
 import { InfernoRegion } from "./content/inferno/js/InfernoRegion";
 import { InfernoSettings } from "./content/inferno/js/InfernoSettings";
 import { V3Shell } from "./v3/V3Shell";
 
 const SpecialAttackBarBackground = Assets.getAssetUrl("assets/images/attackstyles/interface/special_attack_background.png");
+
+// The player is drawn from the OSRS cache (items + default body), served from this site (src/assets/player-render).
+CacheRender.configure(window.location.origin + "/player-render/manifest.json");
 
 Settings.readFromStorage();
 InfernoSettings.readFromStorage();

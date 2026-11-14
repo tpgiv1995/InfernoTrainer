@@ -48,6 +48,7 @@ const config = {
         { from: '*.png', to: "", context: "node_modules/osrs-sdk/_bundles/", noErrorOnMissing: true },
         { from: '*.gif', to: "", context: "node_modules/osrs-sdk/_bundles/", noErrorOnMissing: true },
         { from: '*.ogg', to: "", context: "node_modules/osrs-sdk/_bundles/", noErrorOnMissing: true },
+        { from: `assets/player-render`, to: "player-render", context: `src/` },
         { from: `assets/fonts/*.woff`, to: "", context: `src/` },
         { from: `assets/fonts/*.woff2`, to: "", context: `src/` },
       ],

@@ -5,10 +5,11 @@ A personal build of the open-source [Inferno Trainer](https://github.com/OldScho
 panels, a fight setup screen, a Try again prompt, and spawn import from Inferno Stats links.
 Live: https://v3-infernosim.netlify.app
 
-Gameplay is upstream's, unchanged: the engine is `osrs-sdk` 0.1.4 (the version upstream pins) plus a
-small set of UI-only patches (branch `inferno-v3` of
-[tpgiv1995/osrs-sdk](https://github.com/tpgiv1995/osrs-sdk/tree/inferno-v3)). The built package is
-committed in `vendor/` and referenced with `file:` in `package.json`.
+The engine is `osrs-sdk` 0.1.4 (the version upstream pins) plus the patches in branch `inferno-v3` of
+[tpgiv1995/osrs-sdk](https://github.com/tpgiv1995/osrs-sdk/tree/inferno-v3). Legacy mode matches upstream
+for the fields and scenarios the five golden flows record (see "Golden flows" below); V3 intentionally
+changes the documented combat mechanics and loadout (calculator formulas, prayers, potions, spells, the
+Inferno kit). The built package is committed in `vendor/` and referenced with `file:` in `package.json`.
 
 ## What is different from upstream
 
@@ -18,6 +19,7 @@ committed in `vendor/` and referenced with `file:` in `package.json`.
 | Controls | F1 combat, F2 inventory, F3 prayer, F4 magic, F5 equipment; the key of the open panel closes it. Right-drag turns the camera (sensitivity setting), a quick right-click opens the menu. |
 | Layout | RuneLite modern layout: a single bottom tab row, larger panel, chat strip. The site sidebar sits behind the gear button. |
 | Prayer | Level 93. The prayer book uses the V3 layout (switch to the stock order on the setup screen). |
+| Player model | The character is drawn from the OSRS cache: the real wear model of every item it wears, over the default body (head, jaw, torso, arms, hands, legs, feet) so an item without a model leaves the body part showing. The bundle is `src/assets/player-render/` (cache revision 242, OpenRS2 2762), rebuilt with `scripts/player-render/extract.mts` in the SDK repo. |
 | Death | An overlay offers Try again (Enter). |
 | Spawn import | The URL accepts the Inferno Stats params (`bat`, `blob`, `melee`, `ranger`, `mager`, `copyable`). The setup screen and the sidebar have a "Paste link" box for an infernotrainer.com or infernostats link. |
 | Settings | Everything persists in the browser (the engine's keys plus `v3-inferno-sim:settings`). |

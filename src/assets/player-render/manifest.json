@@ -1,0 +1,344 @@
+{
+  "schemaVersion": 1,
+  "bundleVersion": "osrs-242-player-4e2df9c3f44e",
+  "cache": {
+    "revision": 242,
+    "source": "openrs2:2762",
+    "contentHash": "4e2df9c3f44e80be3e8708b21dac2c86418eec1545b7d2ff163c31ea7226b64b"
+  },
+  "assets": {
+    "player-animations": {
+      "file": "66d5b5c618be0567cdc1a254a13700c23d93dc6b88e11d6bad41360ce6306b1a.bin",
+      "sha256": "66d5b5c618be0567cdc1a254a13700c23d93dc6b88e11d6bad41360ce6306b1a",
+      "bytes": 27796
+    },
+    "player-item-11832": {
+      "file": "3127f6872ee8c55b935b78ae03e02e30cd02c1954a9d92cf2bb2ffe2210a3979.bin",
+      "sha256": "3127f6872ee8c55b935b78ae03e02e30cd02c1954a9d92cf2bb2ffe2210a3979",
+      "bytes": 23224
+    },
+    "player-item-12002": {
+      "file": "7da38da318870f5372906bc553d896e5b02e4a115f3c94e0c14303c2d7736506.bin",
+      "sha256": "7da38da318870f5372906bc553d896e5b02e4a115f3c94e0c14303c2d7736506",
+      "bytes": 1346
+    },
+    "player-item-12926": {
+      "file": "c9c64127785d204ef5c4a3d6b1464d0b575baa733c6b49c5ed544ffc7b71abc0.bin",
+      "sha256": "c9c64127785d204ef5c4a3d6b1464d0b575baa733c6b49c5ed544ffc7b71abc0",
+      "bytes": 3467
+    },
+    "player-item-21791": {
+      "file": "43c4412ae42e924d363897e5ef2f5e58c314688a222794644650a52b3337b353.bin",
+      "sha256": "43c4412ae42e924d363897e5ef2f5e58c314688a222794644650a52b3337b353",
+      "bytes": 5511
+    },
+    "player-item-22947": {
+      "file": "1582a928b55ed38eb7f244127be83eea269fdbb7ed14bf03e35ca930f6abc08a.bin",
+      "sha256": "1582a928b55ed38eb7f244127be83eea269fdbb7ed14bf03e35ca930f6abc08a",
+      "bytes": 174
+    },
+    "player-item-23991": {
+      "file": "5b6ab6ca2070a65ab8a4eac60275321b19423097ca357fb8be9b104273cbccb3.bin",
+      "sha256": "5b6ab6ca2070a65ab8a4eac60275321b19423097ca357fb8be9b104273cbccb3",
+      "bytes": 2519
+    },
+    "player-item-25886": {
+      "file": "c2386dfccd1066ae5ce9931314c23d6e8d8100f75a6695612b86eebd774256ee.bin",
+      "sha256": "c2386dfccd1066ae5ce9931314c23d6e8d8100f75a6695612b86eebd774256ee",
+      "bytes": 10584
+    },
+    "player-item-27721": {
+      "file": "bdc0aadf112bedb2301695aa5d3b8d3b11db298c5a79b76d5ffb5bf82ddbe47a.bin",
+      "sha256": "bdc0aadf112bedb2301695aa5d3b8d3b11db298c5a79b76d5ffb5bf82ddbe47a",
+      "bytes": 7359
+    },
+    "player-item-27725": {
+      "file": "f6ebc8102f9062f3680a69bafe8d14dca1157d0626532a9707b1eb7ee437271e.bin",
+      "sha256": "f6ebc8102f9062f3680a69bafe8d14dca1157d0626532a9707b1eb7ee437271e",
+      "bytes": 7960
+    },
+    "player-item-27729": {
+      "file": "019654edff6ee6e1e30033f2bb486758510edaf43ba705db03a38551636b7e49.bin",
+      "sha256": "019654edff6ee6e1e30033f2bb486758510edaf43ba705db03a38551636b7e49",
+      "bytes": 3960
+    },
+    "player-item-28260": {
+      "file": "bf7258f275a452cc13a00309c8d434bab876a3ce162d24a41e3f131766697742.bin",
+      "sha256": "bf7258f275a452cc13a00309c8d434bab876a3ce162d24a41e3f131766697742",
+      "bytes": 5657
+    },
+    "player-item-28313": {
+      "file": "1582a928b55ed38eb7f244127be83eea269fdbb7ed14bf03e35ca930f6abc08a.bin",
+      "sha256": "1582a928b55ed38eb7f244127be83eea269fdbb7ed14bf03e35ca930f6abc08a",
+      "bytes": 174
+    },
+    "player-item-28951": {
+      "file": "540dcdff67ab6d723b97716932880e285dd436cb9670901c5ba05f2a2d4de672.bin",
+      "sha256": "540dcdff67ab6d723b97716932880e285dd436cb9670901c5ba05f2a2d4de672",
+      "bytes": 9892
+    },
+    "player-item-30756": {
+      "file": "b05ef2514a5ebbdc0c56f4f3adcfa41c8528172074c32ce3a695deb2264b0bd2.bin",
+      "sha256": "b05ef2514a5ebbdc0c56f4f3adcfa41c8528172074c32ce3a695deb2264b0bd2",
+      "bytes": 19114
+    },
+    "player-item-31095": {
+      "file": "f4f0352f21462d4d60ebab17b6dbd1abd1e2f1ec4d7bf1af62f97bb00b34930f.bin",
+      "sha256": "f4f0352f21462d4d60ebab17b6dbd1abd1e2f1ec4d7bf1af62f97bb00b34930f",
+      "bytes": 14256
+    },
+    "player-item-31106": {
+      "file": "e47e940b94668701827b8be56f218625ffecabd289556831bdb8c1be40208bee.bin",
+      "sha256": "e47e940b94668701827b8be56f218625ffecabd289556831bdb8c1be40208bee",
+      "bytes": 5115
+    },
+    "player-item-31113": {
+      "file": "6ce4041e5e422739007d753b6d24faaa9d8544d4f78ad7bc50f82a3346e04ff0.bin",
+      "sha256": "6ce4041e5e422739007d753b6d24faaa9d8544d4f78ad7bc50f82a3346e04ff0",
+      "bytes": 6765
+    },
+    "player-item-33639": {
+      "file": "ddf2a0f1e9be03f3f0cef76bea95531eafdee5f675f85d938f016e580da85e6d.bin",
+      "sha256": "ddf2a0f1e9be03f3f0cef76bea95531eafdee5f675f85d938f016e580da85e6d",
+      "bytes": 3519
+    },
+    "player-item-4724": {
+      "file": "bf9a886edfce8e0f4176c625342adae18a90b7c6d59235d28db7a0abac2afbd0.bin",
+      "sha256": "bf9a886edfce8e0f4176c625342adae18a90b7c6d59235d28db7a0abac2afbd0",
+      "bytes": 2110
+    },
+    "player-kit-arms": {
+      "file": "a670e1f3e106af68fb0b26cf43119974e3578c2189cfbf100eedf9d16c0e1388.bin",
+      "sha256": "a670e1f3e106af68fb0b26cf43119974e3578c2189cfbf100eedf9d16c0e1388",
+      "bytes": 1732
+    },
+    "player-kit-feet": {
+      "file": "b6bdf0e62ae63a3de9b64bbe9007555ae1f335955fa218083824192169b10824.bin",
+      "sha256": "b6bdf0e62ae63a3de9b64bbe9007555ae1f335955fa218083824192169b10824",
+      "bytes": 1585
+    },
+    "player-kit-hands": {
+      "file": "ac770587c8244c67e0a19506893c5c334cd0d2d172911f2da8f21b72c2264f3d.bin",
+      "sha256": "ac770587c8244c67e0a19506893c5c334cd0d2d172911f2da8f21b72c2264f3d",
+      "bytes": 1289
+    },
+    "player-kit-head": {
+      "file": "422acee9184672d2183d016e9ab27015d3cb2707ed3ac06de6dbcc10c701613d.bin",
+      "sha256": "422acee9184672d2183d016e9ab27015d3cb2707ed3ac06de6dbcc10c701613d",
+      "bytes": 2623
+    },
+    "player-kit-jaw": {
+      "file": "d10678619014149e3bbc1c962a6f2125e16c652bbed5cd49a954bb9c0b08c88a.bin",
+      "sha256": "d10678619014149e3bbc1c962a6f2125e16c652bbed5cd49a954bb9c0b08c88a",
+      "bytes": 567
+    },
+    "player-kit-legs": {
+      "file": "2ab2184cb342b9d94347ff08af357e62cf60df3ef42b43badd6aae689c16e916.bin",
+      "sha256": "2ab2184cb342b9d94347ff08af357e62cf60df3ef42b43badd6aae689c16e916",
+      "bytes": 1891
+    },
+    "player-kit-torso": {
+      "file": "428fad63e80894945c32d8f8c715a4807222f0c784e265748e4de79e53a390f8.bin",
+      "sha256": "428fad63e80894945c32d8f8c715a4807222f0c784e265748e4de79e53a390f8",
+      "bytes": 1298
+    }
+  },
+  "references": {},
+  "playerItems": {
+    "item:28260": "player-item-28260",
+    "item:23991": "player-item-23991",
+    "item:4724": "player-item-4724",
+    "item:12002": "player-item-12002",
+    "item:21791": "player-item-21791",
+    "item:22947": "player-item-22947",
+    "item:11832": "player-item-11832",
+    "item:30756": "player-item-30756",
+    "item:31106": "player-item-31106",
+    "item:31095": "player-item-31095",
+    "item:28313": "player-item-28313",
+    "item:25886": "player-item-25886",
+    "item:27729": "player-item-27729",
+    "item:27721": "player-item-27721",
+    "item:27725": "player-item-27725",
+    "item:28951": "player-item-28951",
+    "item:33639": "player-item-33639",
+    "item:12926": "player-item-12926",
+    "item:31113": "player-item-31113"
+  },
+  "playerItemInfo": {
+    "item:28260": {
+      "name": "Blood ancient sceptre",
+      "hasModel": true,
+      "slots": [
+        3
+      ]
+    },
+    "item:23991": {
+      "name": "Crystal shield",
+      "hasModel": true,
+      "slots": [
+        5
+      ]
+    },
+    "item:4724": {
+      "name": "Guthan's helm",
+      "hasModel": true,
+      "slots": [
+        0,
+        8,
+        11
+      ]
+    },
+    "item:12002": {
+      "name": "Occult necklace",
+      "hasModel": true,
+      "slots": [
+        2
+      ]
+    },
+    "item:21791": {
+      "name": "Imbued Saradomin cape",
+      "hasModel": true,
+      "slots": [
+        1
+      ]
+    },
+    "item:22947": {
+      "name": "Rada's blessing 4",
+      "hasModel": false,
+      "slots": [
+        13
+      ]
+    },
+    "item:11832": {
+      "name": "Bandos chestplate",
+      "hasModel": true,
+      "slots": [
+        4,
+        6
+      ]
+    },
+    "item:30756": {
+      "name": "Oathplate legs",
+      "hasModel": true,
+      "slots": [
+        7
+      ]
+    },
+    "item:31106": {
+      "name": "Confliction gauntlets",
+      "hasModel": true,
+      "slots": [
+        9
+      ]
+    },
+    "item:31095": {
+      "name": "Avernic treads (pr)(et)",
+      "hasModel": true,
+      "slots": [
+        10
+      ]
+    },
+    "item:28313": {
+      "name": "Magus ring",
+      "hasModel": false,
+      "slots": [
+        12
+      ]
+    },
+    "item:25886": {
+      "name": "Bow of Faerdhinen (c)",
+      "hasModel": true,
+      "slots": [
+        3,
+        5
+      ]
+    },
+    "item:27729": {
+      "name": "Crystal helm",
+      "hasModel": true,
+      "slots": [
+        0,
+        8,
+        11
+      ]
+    },
+    "item:27721": {
+      "name": "Crystal body",
+      "hasModel": true,
+      "slots": [
+        4,
+        6
+      ]
+    },
+    "item:27725": {
+      "name": "Crystal legs",
+      "hasModel": true,
+      "slots": [
+        7
+      ]
+    },
+    "item:28951": {
+      "name": "Dizana's quiver",
+      "hasModel": true,
+      "slots": [
+        1
+      ]
+    },
+    "item:33639": {
+      "name": "Necklace of rupture",
+      "hasModel": true,
+      "slots": [
+        2
+      ]
+    },
+    "item:12926": {
+      "name": "Toxic blowpipe",
+      "hasModel": true,
+      "slots": [
+        3,
+        5
+      ]
+    },
+    "item:31113": {
+      "name": "Eye of Ayak",
+      "hasModel": true,
+      "slots": [
+        3
+      ]
+    }
+  },
+  "playerKit": {
+    "head": {
+      "asset": "player-kit-head",
+      "slot": 8
+    },
+    "jaw": {
+      "asset": "player-kit-jaw",
+      "slot": 11
+    },
+    "torso": {
+      "asset": "player-kit-torso",
+      "slot": 4
+    },
+    "arms": {
+      "asset": "player-kit-arms",
+      "slot": 6
+    },
+    "hands": {
+      "asset": "player-kit-hands",
+      "slot": 9
+    },
+    "legs": {
+      "asset": "player-kit-legs",
+      "slot": 7
+    },
+    "feet": {
+      "asset": "player-kit-feet",
+      "slot": 10
+    }
+  },
+  "sharedAssets": {
+    "playerAnimations": "player-animations"
+  }
+}
