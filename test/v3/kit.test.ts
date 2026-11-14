@@ -70,10 +70,23 @@ describe("V3 Inferno loadout", () => {
     expect(count("Divine ranging potion")).toBe(0);
     expect(count("Bastion Potion")).toBe(0);
     ["Bow of faerdhinen", "Crystal Helm", "Crystal Body", "Crystal Legs", "Dizana's Quiver", "Necklace of rupture",
-      "Toxic Blowpipe", "Eye of Ayak", "Saturated heart", "Rune pouch"].forEach((n) => expect(count(n)).toBe(1));
+      "Toxic Blowpipe", "Eye of Ayak", "Saturated heart", "Divine rune pouch (l)"].forEach((n) => expect(count(n)).toBe(1));
     expect(inv).not.toContain("Armadyl brew");
     expect(player.stats.prayer).toBe(93);
     expect(player.stats.magic).toBe(99);
+  });
+
+  test("the rune pouch is the Divine rune pouch (l) with the four saved stacks", () => {
+    const { player } = setup();
+    const pouch = player.inventory.find((i) => i && i.itemName === "Divine rune pouch (l)") as unknown as {
+      stacks: { rune: string; id: number; quantity: number }[];
+    };
+    expect(pouch.stacks.map((s) => [s.rune, s.id, s.quantity])).toEqual([
+      ["Water", 555, 15000],
+      ["Death", 560, 2525],
+      ["Blood", 565, 8000],
+      ["Soul", 566, 8000],
+    ]);
   });
 
   test("tank set totals: Magic attack +60 (with the Eye), Ranged defence +371, prayer bonus 9, magic damage 18%", () => {

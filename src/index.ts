@@ -47,8 +47,36 @@ tileMarkerColor.value = Settings.tileMarkerColor;
 
 V3Shell.init({ world });
 
-// Read access for live checks (browser automation): the current player and the world.
-(window as unknown as { __v3Sim: unknown }).__v3Sim = { player: () => Trainer.player, world };
+// Live-check diagnostics, only with ?debug in the URL: frozen snapshots of plain data, never the live objects.
+if (new URLSearchParams(window.location.search).has("debug")) {
+  const snapshot = () => {
+    const p = Trainer.player;
+    const aggro = p.aggro as unknown as { currentStats: { hitpoint: number }; mobName?: () => unknown } | null;
+    const pouch = p.inventory.find((i) => i && typeof (i as unknown as { spendRunes?: unknown }).spendRunes === "function") as unknown as
+      | { stacks: { rune: string; quantity: number }[] }
+      | undefined;
+    return Object.freeze(
+      JSON.parse(
+        JSON.stringify({
+          tick: world.globalTickCounter,
+          stats: p.currentStats,
+          baseStats: p.stats,
+          weapon: p.equipment.weapon ? p.equipment.weapon.itemName : null,
+          offhand: p.equipment.offhand ? p.equipment.offhand.itemName : null,
+          worn: Object.values(p.equipment).filter(Boolean).map((e) => e.itemName),
+          inventory: p.inventory.map((i) => (i ? { name: i.itemName, doses: (i as unknown as { doses?: number }).doses ?? null } : null)),
+          prayers: p.prayerController.activePrayers().map((x) => x.name),
+          aggro: aggro ? { name: aggro.mobName ? String(aggro.mobName()) : null, hp: aggro.currentStats.hitpoint } : null,
+          attackDelay: p.attackDelay,
+          bonuses: p.bonuses,
+          runes: pouch ? pouch.stacks : null,
+          saturatedHeart: Boolean((p as unknown as { saturatedHeart: unknown }).saturatedHeart),
+        }),
+      ),
+    );
+  };
+  (window as unknown as { __v3Sim: unknown }).__v3Sim = Object.freeze({ snapshot });
+}
 V3Shell.addSidebarPaste();
 
 const { player } = selectedRegion.initialiseRegion();

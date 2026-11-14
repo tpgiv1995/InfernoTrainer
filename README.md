@@ -64,19 +64,23 @@ On Git Bash set `MSYS_NO_PATHCONV=1` if an environment value that looks like a p
 ### Golden flows
 
 `test/golden/harness.ts` loads a spawn URL into the real `InfernoRegion` without a browser, plays N ticks with
-a scripted player (stands still, never dies, no prayers) and records every mob's name, tile, hitpoints and attack
-timer per tick, plus the damage the player took. Randomness (`Random` and `Math.random`, including lodash)
+a scripted player (stands still, never dies, no prayers, never attacks) and records every mob's name, tile,
+hitpoints and attack timer per tick, plus the damage the player took. Randomness (`Random` and `Math.random`, including lodash)
 is seeded inside the harness only.
 
 Five flows: an Inferno Stats style link with every mob type and a double blob, native wave 63 on fixed tiles,
 wave 67 (Jad and healers), wave 68 (triple Jad), wave 69 (Zuk, 260 ticks, so sets and healers).
 `test/golden/traces/*.json` were written by running the same harness against **upstream** `beta`
-(commit in `traces/UPSTREAM_COMMIT.txt`, npm `osrs-sdk` 0.1.4), so a green run shows the fork's mob
-behaviour is identical to upstream's. To rewrite them: check out upstream, copy `test/golden/*.ts` and
+(commit in `traces/UPSTREAM_COMMIT.txt`, npm `osrs-sdk` 0.1.4), so a green run shows that, for these
+scenarios and the recorded fields, the fork's mobs spawn, move and time their attacks the way upstream's do. To rewrite them: check out upstream, copy `test/golden/*.ts` and
 `test/setupFiles.ts`, and run `GOLDEN_WRITE=1 npx jest test/golden`.
 
-Covers: mob spawning, movement, targeting, attacks and damage rolls, Jad and healers, Zuk and the shield.
-Does not cover: rendering, sound, the player's own attacks, anything UI.
+Covers (what the traces record): mob spawn tiles, movement, hitpoints, attack timers and the damage the unprotected
+scripted player takes, in upstream's legacy rules (`V3Rules.calculator = false`; the V3 rules change player and
+monster combat numbers on purpose and have their own tests).
+Does not cover: Jad healers, Zuk's healers and shield (wave 69 never takes Zuk below 1,118 HP, so no HP threshold
+is reached), the player's own attacks, targeting, prayers, projectiles, rendering, sound, UI. Legacy mode matches
+upstream's combat formulas and loadout behaviour; it is not a claim about the whole SDK.
 
 Browser side-by-side: open the same link on https://www.infernotrainer.com/ and on the fork and compare
 where the mobs stand at the end of "Get ready".
