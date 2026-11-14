@@ -8,6 +8,8 @@ import { JalAkRekKet } from "./JalAkRekKet";
 import { JalAkRekMej } from "./JalAkRekMej";
 import { JalAkRekXil } from "./JalAkRekXil";
 import { InfernoMobDeathStore } from "../InfernoMobDeathStore";
+import { MageProjectileModel } from "./JalZek";
+import { RangeProjectileModel } from "./JalXil";
 
 const BlobModel = Assets.getAssetUrl("models/7693_33001.glb");
 
@@ -32,10 +34,16 @@ export class JalAk extends Mob {
 
     this.weapons = {
       crush: new MeleeWeapon(),
+      // The blob throws the same balls as the Jal-Zek (magic) and Jal-Xil (ranged); only the picture is set here,
+      // timing is unchanged. (It used to fall back to a coloured sphere.)
       magic: new MagicWeapon({
+        model: MageProjectileModel,
+        modelScale: 1 / 128,
         sound: new Sound(BlobSound)
       }),
       range: new RangedWeapon({
+        model: RangeProjectileModel,
+        modelScale: 1 / 128,
         sound: new Sound(BlobSound)
       }),
     };

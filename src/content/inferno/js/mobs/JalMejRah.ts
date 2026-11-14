@@ -10,7 +10,9 @@ const BatModel = Assets.getAssetUrl("models/7692_33018.glb");
 
 class JalMejRahWeapon extends RangedWeapon {
   attack(from: Unit, to: Unit, bonuses: AttackBonuses = {}, options: ProjectileOptions = {}): boolean {
-    super.attack(from, to, bonuses, options);
+    // The bat swoops: RuneLite's graphic list has no Jal-MejRah projectile, so nothing is drawn in flight (it was
+    // a green range ball). Timing and damage are unchanged.
+    super.attack(from, to, bonuses, { hidden: true, ...options });
     const player = to as Player;
     player.currentStats.run -= 300;
     return true;

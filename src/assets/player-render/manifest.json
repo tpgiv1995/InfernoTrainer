@@ -1,146 +1,196 @@
 {
   "schemaVersion": 1,
-  "bundleVersion": "osrs-242-player-4e2df9c3f44e",
+  "bundleVersion": "osrs-242-player-de8d7e8d6789",
   "cache": {
     "revision": 242,
     "source": "openrs2:2762",
-    "contentHash": "4e2df9c3f44e80be3e8708b21dac2c86418eec1545b7d2ff163c31ea7226b64b"
+    "contentHash": "de8d7e8d678952bc894593b1417e8bf8b190e907ba5d40907c145a111677ad9c"
   },
   "assets": {
     "player-animations": {
-      "file": "66d5b5c618be0567cdc1a254a13700c23d93dc6b88e11d6bad41360ce6306b1a.bin",
-      "sha256": "66d5b5c618be0567cdc1a254a13700c23d93dc6b88e11d6bad41360ce6306b1a",
-      "bytes": 27796
+      "file": "01ab80ee39bf60ce4362999d40be9c3646bb189bdc76ca9398946762f9e33d7f.bin",
+      "sha256": "01ab80ee39bf60ce4362999d40be9c3646bb189bdc76ca9398946762f9e33d7f",
+      "bytes": 39122
     },
     "player-item-11832": {
-      "file": "3127f6872ee8c55b935b78ae03e02e30cd02c1954a9d92cf2bb2ffe2210a3979.bin",
-      "sha256": "3127f6872ee8c55b935b78ae03e02e30cd02c1954a9d92cf2bb2ffe2210a3979",
+      "file": "68bee3ec37b62b88019a9bfd095f987de8f63b899ff26835c2e15ec64913faf1.bin",
+      "sha256": "68bee3ec37b62b88019a9bfd095f987de8f63b899ff26835c2e15ec64913faf1",
       "bytes": 23224
     },
     "player-item-12002": {
-      "file": "7da38da318870f5372906bc553d896e5b02e4a115f3c94e0c14303c2d7736506.bin",
-      "sha256": "7da38da318870f5372906bc553d896e5b02e4a115f3c94e0c14303c2d7736506",
+      "file": "c2b52ceaf10b70e26f5508ecb9a613748c8b0cf8709f402c3a5696536f1192f5.bin",
+      "sha256": "c2b52ceaf10b70e26f5508ecb9a613748c8b0cf8709f402c3a5696536f1192f5",
       "bytes": 1346
     },
     "player-item-12926": {
-      "file": "c9c64127785d204ef5c4a3d6b1464d0b575baa733c6b49c5ed544ffc7b71abc0.bin",
-      "sha256": "c9c64127785d204ef5c4a3d6b1464d0b575baa733c6b49c5ed544ffc7b71abc0",
+      "file": "e7c8d9281b31c94578b73203b4872c3e3f887d8bb4a88e6a6eb6df20e1067887.bin",
+      "sha256": "e7c8d9281b31c94578b73203b4872c3e3f887d8bb4a88e6a6eb6df20e1067887",
       "bytes": 3467
     },
     "player-item-21791": {
-      "file": "43c4412ae42e924d363897e5ef2f5e58c314688a222794644650a52b3337b353.bin",
-      "sha256": "43c4412ae42e924d363897e5ef2f5e58c314688a222794644650a52b3337b353",
+      "file": "1531e66a190c911ac65e3deb41d59fd531ee97803d7213f17395f560ebed8f6d.bin",
+      "sha256": "1531e66a190c911ac65e3deb41d59fd531ee97803d7213f17395f560ebed8f6d",
       "bytes": 5511
     },
     "player-item-22947": {
-      "file": "1582a928b55ed38eb7f244127be83eea269fdbb7ed14bf03e35ca930f6abc08a.bin",
-      "sha256": "1582a928b55ed38eb7f244127be83eea269fdbb7ed14bf03e35ca930f6abc08a",
-      "bytes": 174
+      "file": "342d68fd486c074f8647d76ca67a743ba4fb36ce618416a758c872a673e1158d.bin",
+      "sha256": "342d68fd486c074f8647d76ca67a743ba4fb36ce618416a758c872a673e1158d",
+      "bytes": 184
     },
     "player-item-23991": {
-      "file": "5b6ab6ca2070a65ab8a4eac60275321b19423097ca357fb8be9b104273cbccb3.bin",
-      "sha256": "5b6ab6ca2070a65ab8a4eac60275321b19423097ca357fb8be9b104273cbccb3",
-      "bytes": 2519
+      "file": "b90fe5496d3c06c74ffc620d8c0a94b9250427fd48f78fc107e787bb5cee0db1.bin",
+      "sha256": "b90fe5496d3c06c74ffc620d8c0a94b9250427fd48f78fc107e787bb5cee0db1",
+      "bytes": 2520
     },
     "player-item-25886": {
-      "file": "c2386dfccd1066ae5ce9931314c23d6e8d8100f75a6695612b86eebd774256ee.bin",
-      "sha256": "c2386dfccd1066ae5ce9931314c23d6e8d8100f75a6695612b86eebd774256ee",
+      "file": "477c7002a68a054d05c1ae5c00fc141c1bdc5bfe3737be0b62e0b51899ab8142.bin",
+      "sha256": "477c7002a68a054d05c1ae5c00fc141c1bdc5bfe3737be0b62e0b51899ab8142",
       "bytes": 10584
     },
     "player-item-27721": {
-      "file": "bdc0aadf112bedb2301695aa5d3b8d3b11db298c5a79b76d5ffb5bf82ddbe47a.bin",
-      "sha256": "bdc0aadf112bedb2301695aa5d3b8d3b11db298c5a79b76d5ffb5bf82ddbe47a",
+      "file": "8015dac623dbd5e56b7ef01b7763dfbdbc29167634eb499c6082d48fe790e8a9.bin",
+      "sha256": "8015dac623dbd5e56b7ef01b7763dfbdbc29167634eb499c6082d48fe790e8a9",
       "bytes": 7359
     },
     "player-item-27725": {
-      "file": "f6ebc8102f9062f3680a69bafe8d14dca1157d0626532a9707b1eb7ee437271e.bin",
-      "sha256": "f6ebc8102f9062f3680a69bafe8d14dca1157d0626532a9707b1eb7ee437271e",
+      "file": "b606dcd25da27be130ffdb2a919c2376ea0aab46003b7cd2521b8c7b7bedc28f.bin",
+      "sha256": "b606dcd25da27be130ffdb2a919c2376ea0aab46003b7cd2521b8c7b7bedc28f",
       "bytes": 7960
     },
     "player-item-27729": {
-      "file": "019654edff6ee6e1e30033f2bb486758510edaf43ba705db03a38551636b7e49.bin",
-      "sha256": "019654edff6ee6e1e30033f2bb486758510edaf43ba705db03a38551636b7e49",
+      "file": "a28856bb9d3493bce4c61b3b784998092e3fef4cb5fdb74c04637a505d1651a5.bin",
+      "sha256": "a28856bb9d3493bce4c61b3b784998092e3fef4cb5fdb74c04637a505d1651a5",
       "bytes": 3960
     },
     "player-item-28260": {
-      "file": "bf7258f275a452cc13a00309c8d434bab876a3ce162d24a41e3f131766697742.bin",
-      "sha256": "bf7258f275a452cc13a00309c8d434bab876a3ce162d24a41e3f131766697742",
+      "file": "8d9d4c407bdfa009c83390bd85d67809f2bcaaf2d0a0b324b1b9d4c472aa7864.bin",
+      "sha256": "8d9d4c407bdfa009c83390bd85d67809f2bcaaf2d0a0b324b1b9d4c472aa7864",
       "bytes": 5657
     },
     "player-item-28313": {
-      "file": "1582a928b55ed38eb7f244127be83eea269fdbb7ed14bf03e35ca930f6abc08a.bin",
-      "sha256": "1582a928b55ed38eb7f244127be83eea269fdbb7ed14bf03e35ca930f6abc08a",
-      "bytes": 174
+      "file": "342d68fd486c074f8647d76ca67a743ba4fb36ce618416a758c872a673e1158d.bin",
+      "sha256": "342d68fd486c074f8647d76ca67a743ba4fb36ce618416a758c872a673e1158d",
+      "bytes": 184
     },
     "player-item-28951": {
-      "file": "540dcdff67ab6d723b97716932880e285dd436cb9670901c5ba05f2a2d4de672.bin",
-      "sha256": "540dcdff67ab6d723b97716932880e285dd436cb9670901c5ba05f2a2d4de672",
+      "file": "9522dbb2b5b04a025639ce09aa83ac5c7737b8b045cc3306b9d9bad0e026ad5f.bin",
+      "sha256": "9522dbb2b5b04a025639ce09aa83ac5c7737b8b045cc3306b9d9bad0e026ad5f",
       "bytes": 9892
     },
     "player-item-30756": {
-      "file": "b05ef2514a5ebbdc0c56f4f3adcfa41c8528172074c32ce3a695deb2264b0bd2.bin",
-      "sha256": "b05ef2514a5ebbdc0c56f4f3adcfa41c8528172074c32ce3a695deb2264b0bd2",
+      "file": "3e8beecf5a65d5bbe2ed903fa5d6b138fe1c2b07c6607e6991b42ba04df0ff18.bin",
+      "sha256": "3e8beecf5a65d5bbe2ed903fa5d6b138fe1c2b07c6607e6991b42ba04df0ff18",
       "bytes": 19114
     },
     "player-item-31095": {
-      "file": "f4f0352f21462d4d60ebab17b6dbd1abd1e2f1ec4d7bf1af62f97bb00b34930f.bin",
-      "sha256": "f4f0352f21462d4d60ebab17b6dbd1abd1e2f1ec4d7bf1af62f97bb00b34930f",
+      "file": "1455646baf490b73f085893a302b39a9354063d7c04427ef0aa06e37fee58e92.bin",
+      "sha256": "1455646baf490b73f085893a302b39a9354063d7c04427ef0aa06e37fee58e92",
       "bytes": 14256
     },
     "player-item-31106": {
-      "file": "e47e940b94668701827b8be56f218625ffecabd289556831bdb8c1be40208bee.bin",
-      "sha256": "e47e940b94668701827b8be56f218625ffecabd289556831bdb8c1be40208bee",
+      "file": "f06dde65190d5ac680274c03242ca26da50960ca6ea3548d1681e8bde76531c2.bin",
+      "sha256": "f06dde65190d5ac680274c03242ca26da50960ca6ea3548d1681e8bde76531c2",
       "bytes": 5115
     },
     "player-item-31113": {
-      "file": "6ce4041e5e422739007d753b6d24faaa9d8544d4f78ad7bc50f82a3346e04ff0.bin",
-      "sha256": "6ce4041e5e422739007d753b6d24faaa9d8544d4f78ad7bc50f82a3346e04ff0",
+      "file": "a457025ffdc0730e316e4a59b2bf767069c21c04082170d000d8641859ed154f.bin",
+      "sha256": "a457025ffdc0730e316e4a59b2bf767069c21c04082170d000d8641859ed154f",
       "bytes": 6765
     },
     "player-item-33639": {
-      "file": "ddf2a0f1e9be03f3f0cef76bea95531eafdee5f675f85d938f016e580da85e6d.bin",
-      "sha256": "ddf2a0f1e9be03f3f0cef76bea95531eafdee5f675f85d938f016e580da85e6d",
+      "file": "a7f45a70981f072c06b335f0a634aa5f1c9a787766da7d260ed38ca4a0c2b54a.bin",
+      "sha256": "a7f45a70981f072c06b335f0a634aa5f1c9a787766da7d260ed38ca4a0c2b54a",
       "bytes": 3519
     },
     "player-item-4724": {
-      "file": "bf9a886edfce8e0f4176c625342adae18a90b7c6d59235d28db7a0abac2afbd0.bin",
-      "sha256": "bf9a886edfce8e0f4176c625342adae18a90b7c6d59235d28db7a0abac2afbd0",
+      "file": "37f03670d14d50748bbaba4b1b4b4a8b04ca2b53991be1899638f80ed1b13b8f.bin",
+      "sha256": "37f03670d14d50748bbaba4b1b4b4a8b04ca2b53991be1899638f80ed1b13b8f",
       "bytes": 2110
     },
     "player-kit-arms": {
-      "file": "a670e1f3e106af68fb0b26cf43119974e3578c2189cfbf100eedf9d16c0e1388.bin",
-      "sha256": "a670e1f3e106af68fb0b26cf43119974e3578c2189cfbf100eedf9d16c0e1388",
+      "file": "865e2139346e94bd958c696831bbf1fe2bb1ae2abc458b1be2fdd1723b3f501c.bin",
+      "sha256": "865e2139346e94bd958c696831bbf1fe2bb1ae2abc458b1be2fdd1723b3f501c",
       "bytes": 1732
     },
     "player-kit-feet": {
-      "file": "b6bdf0e62ae63a3de9b64bbe9007555ae1f335955fa218083824192169b10824.bin",
-      "sha256": "b6bdf0e62ae63a3de9b64bbe9007555ae1f335955fa218083824192169b10824",
+      "file": "fa90b35d81b6fcde520d173ab68722305a35cebb990deff9e963b5a272f44e43.bin",
+      "sha256": "fa90b35d81b6fcde520d173ab68722305a35cebb990deff9e963b5a272f44e43",
       "bytes": 1585
     },
     "player-kit-hands": {
-      "file": "ac770587c8244c67e0a19506893c5c334cd0d2d172911f2da8f21b72c2264f3d.bin",
-      "sha256": "ac770587c8244c67e0a19506893c5c334cd0d2d172911f2da8f21b72c2264f3d",
+      "file": "245b59178bcadeb55f7a83b02375cec10d7af7b0e47c502dc69cba82aa9aa64c.bin",
+      "sha256": "245b59178bcadeb55f7a83b02375cec10d7af7b0e47c502dc69cba82aa9aa64c",
       "bytes": 1289
     },
     "player-kit-head": {
-      "file": "422acee9184672d2183d016e9ab27015d3cb2707ed3ac06de6dbcc10c701613d.bin",
-      "sha256": "422acee9184672d2183d016e9ab27015d3cb2707ed3ac06de6dbcc10c701613d",
+      "file": "ca960ecd0ea2afd16968059616b6f03d11c810b94dc169f295793b3f5a80fdb3.bin",
+      "sha256": "ca960ecd0ea2afd16968059616b6f03d11c810b94dc169f295793b3f5a80fdb3",
       "bytes": 2623
     },
     "player-kit-jaw": {
-      "file": "d10678619014149e3bbc1c962a6f2125e16c652bbed5cd49a954bb9c0b08c88a.bin",
-      "sha256": "d10678619014149e3bbc1c962a6f2125e16c652bbed5cd49a954bb9c0b08c88a",
+      "file": "058749e9d90a66a059466fdb278dc7bf1ce1f0cfb57ac29af91874608ca49187.bin",
+      "sha256": "058749e9d90a66a059466fdb278dc7bf1ce1f0cfb57ac29af91874608ca49187",
       "bytes": 567
     },
     "player-kit-legs": {
-      "file": "2ab2184cb342b9d94347ff08af357e62cf60df3ef42b43badd6aae689c16e916.bin",
-      "sha256": "2ab2184cb342b9d94347ff08af357e62cf60df3ef42b43badd6aae689c16e916",
+      "file": "b230d9e379133f978aca5937583a7ebfe76412d41097a157fc684187d1703463.bin",
+      "sha256": "b230d9e379133f978aca5937583a7ebfe76412d41097a157fc684187d1703463",
       "bytes": 1891
     },
     "player-kit-torso": {
-      "file": "428fad63e80894945c32d8f8c715a4807222f0c784e265748e4de79e53a390f8.bin",
-      "sha256": "428fad63e80894945c32d8f8c715a4807222f0c784e265748e4de79e53a390f8",
+      "file": "2246a42f7b2fa70b67184084a3c268fd2f1c0c01584e10ae27e19337822e626a.bin",
+      "sha256": "2246a42f7b2fa70b67184084a3c268fd2f1c0c01584e10ae27e19337822e626a",
       "bytes": 1298
+    },
+    "spotanim-1926": {
+      "file": "331b0928f8144a372d89d0aacd329aadf6f45d4d84266d0666001c5c1c3b9482.bin",
+      "sha256": "331b0928f8144a372d89d0aacd329aadf6f45d4d84266d0666001c5c1c3b9482",
+      "bytes": 11157
+    },
+    "spotanim-1927": {
+      "file": "78e9e4d7d8ac22e89a3c472868506686cbc758990ecf0d3ed624875984abe961.bin",
+      "sha256": "78e9e4d7d8ac22e89a3c472868506686cbc758990ecf0d3ed624875984abe961",
+      "bytes": 3794
+    },
+    "spotanim-3364": {
+      "file": "22be4001ae7f408d0087f3a27885dc5f009d674510acc6c3482a72224e12bd2e.bin",
+      "sha256": "22be4001ae7f408d0087f3a27885dc5f009d674510acc6c3482a72224e12bd2e",
+      "bytes": 94435
+    },
+    "spotanim-3365": {
+      "file": "6f5d75a1dc48a573c7710cc2ff68aa7a9f4591101f43c78fe3baf66c284eaf8e.bin",
+      "sha256": "6f5d75a1dc48a573c7710cc2ff68aa7a9f4591101f43c78fe3baf66c284eaf8e",
+      "bytes": 95117
+    },
+    "spotanim-3366": {
+      "file": "d607f648d0ab5f48609c7945fa1e6b678ec8ca076e761f91aed9ce1f8c6c4d01.bin",
+      "sha256": "d607f648d0ab5f48609c7945fa1e6b678ec8ca076e761f91aed9ce1f8c6c4d01",
+      "bytes": 61362
+    },
+    "spotanim-3367": {
+      "file": "fe1804cef7b1ee526500b1605c0680a169d5aa8ae6165e5e7b504d83e86cfe40.bin",
+      "sha256": "fe1804cef7b1ee526500b1605c0680a169d5aa8ae6165e5e7b504d83e86cfe40",
+      "bytes": 43846
+    },
+    "spotanim-3368": {
+      "file": "8db9944265b2d4ff81fccf004ca7008a9c55fd9b1ef17ce762a6d0d73fe056cc.bin",
+      "sha256": "8db9944265b2d4ff81fccf004ca7008a9c55fd9b1ef17ce762a6d0d73fe056cc",
+      "bytes": 34847
+    },
+    "spotanim-369": {
+      "file": "75d65396e7bc65edc9390c94704f89ed3e3bc723633934dce5d7d2cf272f986b.bin",
+      "sha256": "75d65396e7bc65edc9390c94704f89ed3e3bc723633934dce5d7d2cf272f986b",
+      "bytes": 83645
+    },
+    "spotanim-377": {
+      "file": "953ef368aeaf24884448f3a91ed4647687e02930df50e5bc6728f87cb60478b6.bin",
+      "sha256": "953ef368aeaf24884448f3a91ed4647687e02930df50e5bc6728f87cb60478b6",
+      "bytes": 12835
+    },
+    "spotanim-85": {
+      "file": "554220d532264422bd228e145b24c68ddce7eeb6f02f4c70f7be22bf86710a9b.bin",
+      "sha256": "554220d532264422bd228e145b24c68ddce7eeb6f02f4c70f7be22bf86710a9b",
+      "bytes": 8192
     }
   },
   "references": {},
@@ -337,6 +387,18 @@
       "asset": "player-kit-feet",
       "slot": 10
     }
+  },
+  "spotAnims": {
+    "85": "spotanim-85",
+    "369": "spotanim-369",
+    "377": "spotanim-377",
+    "1926": "spotanim-1926",
+    "1927": "spotanim-1927",
+    "3364": "spotanim-3364",
+    "3365": "spotanim-3365",
+    "3366": "spotanim-3366",
+    "3367": "spotanim-3367",
+    "3368": "spotanim-3368"
   },
   "sharedAssets": {
     "playerAnimations": "player-animations"

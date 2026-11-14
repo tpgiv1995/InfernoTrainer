@@ -91,6 +91,25 @@ prayers, projectiles in flight, rendering, sound and UI. This is not a claim abo
 Browser side-by-side: open the same link on https://www.infernotrainer.com/ and on the fork and compare
 where the mobs stand at the end of "Get ready".
 
+## Browser smoke test (player model and graphics)
+
+`npm run smoke` drives a headless Chrome of its own (a fresh temporary profile; it never touches any other browser).
+It cold-loads wave 1, waits for the cache-rendered player, then for the tank set with the sceptre, the Eye of Ayak,
+the Bow of Faerdhinen set, the Toxic blowpipe and an unequipped body it (1) draws the frame with and without the
+player model and fails if the player's screen region does not change (an empty player region), and (2) attacks the
+nearest monster and fails if any projectile used the coloured-sphere fallback, or if the real graphics for that weapon
+(BowFa launch glow, Eye normal and Soul Rend graphics, Ice and Blood Barrage impacts) never appeared. It exits non-zero
+on any failure and writes screenshots and effect crops to `test-results/smoke/`.
+
+```
+npm run build:site     # the test serves ./dist
+npm run smoke          # or: node scripts/smoke/player-smoke.mjs --url https://v3-infernosim.netlify.app/
+```
+
+Chrome is found with Playwright's `chrome` channel (`playwright-core`, no browser download); set `CHROME_PATH` to use
+another executable. `node scripts/smoke/graphics-gallery.mjs` plays each cache graphic on its own and saves close-ups
+to `test-results/gallery/`. Both rely on the `?debug` hooks (`window.__v3Sim`).
+
 ## Rebuilding the vendored SDK
 
 ```

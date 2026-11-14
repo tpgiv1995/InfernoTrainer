@@ -114,3 +114,4 @@ typings/
 
 # vendored SDK builds are committed on purpose
 !vendor/*.tgz
+test-results/

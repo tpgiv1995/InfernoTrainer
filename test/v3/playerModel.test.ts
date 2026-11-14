@@ -12,6 +12,8 @@ import {
   CacheRender,
   CacheRenderReferences,
   Equipment,
+  PLAYER_ANIMATION_SEQUENCES,
+  PLAYER_CACHE_SPOTANIMS,
   Player,
   Settings,
   TestRegion,
@@ -150,5 +152,20 @@ describe("V3 player model", () => {
     (player.equipment as any).helmet = { cacheItemId: null, model: "player_masori_mask__f_.glb" };
     expect(player.cacheRenderLoadout()).toBeNull();
     expect(player.create3dModel()).toBeTruthy();
+  });
+
+  test("the bundle carries every projectile and impact graphic and the Eye of Ayak sequences", async () => {
+    const bundle = await CacheRender.bundle();
+    Object.values(PLAYER_CACHE_SPOTANIMS).forEach((id) => expect(manifest.spotAnims[String(id)]).toBeTruthy());
+    for (const id of Object.values(PLAYER_CACHE_SPOTANIMS)) {
+      const payload = await cachedPayload(bundle, manifest.spotAnims[String(id)]);
+      expect(payload.positions.length / 3).toBeGreaterThan(10);
+    }
+    const shared = await cachedPayload(bundle, manifest.sharedAssets.playerAnimations);
+    // normal attack 90 cycles (3 ticks), Soul Rend 150 cycles (5 ticks): distinct sequences
+    const length = (sequence: number) => (shared.animations[String(sequence)].lengths as number[]).reduce((a, b) => a + b, 0);
+    expect(length(PLAYER_ANIMATION_SEQUENCES[14])).toBe(90);
+    expect(length(PLAYER_ANIMATION_SEQUENCES[15])).toBe(150);
+    expect(PLAYER_ANIMATION_SEQUENCES[14]).not.toBe(PLAYER_ANIMATION_SEQUENCES[15]);
   });
 });

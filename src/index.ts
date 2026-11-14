@@ -1,6 +1,6 @@
 "use strict";
 
-import { CacheRender, Settings, Region, World, Viewport, MapController, TileMarker, Assets, Location, Chrome, ImageLoader, Trainer, ControlPanelController } from "osrs-sdk";
+import { BloodBarrageSpell, GraphicsObject, IceBarrageSpell, CacheRender, Projectile, V3GraphicsLog, Settings, Region, World, Viewport, MapController, TileMarker, Assets, Location, Chrome, ImageLoader, Trainer, ControlPanelController } from "osrs-sdk";
 
 import { InfernoRegion } from "./content/inferno/js/InfernoRegion";
 import { InfernoSettings } from "./content/inferno/js/InfernoSettings";
@@ -78,7 +78,95 @@ if (new URLSearchParams(window.location.search).has("debug")) {
       ),
     );
   };
-  (window as unknown as { __v3Sim: unknown }).__v3Sim = Object.freeze({ snapshot });
+  Projectile.debugLogging = true;
+  V3GraphicsLog.enabled = true;
+  const hooks = {
+    snapshot,
+    // --- browser smoke test hooks (debug only) ---
+    /** Which model draws the player: "cache", "legacy", "pending". */
+    playerModelSource: () => Viewport.viewport.modelSourceOf(Trainer.player),
+    /** Where the player's model sits on screen (px in the game canvas). */
+    playerBox: () => Viewport.viewport.screenBoxOf(Trainer.player),
+    /** Where the player's current target sits on screen. */
+    targetBox: () => (Trainer.player.aggro ? Viewport.viewport.screenBoxOf(Trainer.player.aggro as never) : null),
+    /** Plays one cache graphic on its own, 3 tiles from the player, and returns where it is on screen. */
+    showGraphic: (id: number, height: number, dx = 2, dy = -2) => {
+      const p = Trainer.player;
+      const entity = new GraphicsObject(selectedRegion, { x: p.location.x + dx, y: p.location.y + dy }, id, { height });
+      selectedRegion.addEntity(entity);
+      (window as unknown as { __lastGraphic?: unknown }).__lastGraphic = entity;
+      return true;
+    },
+    lastGraphicBox: () => {
+      const entity = (window as unknown as { __lastGraphic?: unknown }).__lastGraphic;
+      return entity ? Viewport.viewport.screenBoxOf(entity as never) : null;
+    },
+    hidePlayer: (hidden: boolean) => {
+      Trainer.player.debugHideModel = !!hidden;
+    },
+    /** Take off worn items by slot name (helmet, necklace, cape, chest, legs, feet, gloves, ring, ammo, weapon, offhand). */
+    unequip: (slots: string[]) => {
+      slots.forEach((slot) => {
+        (Trainer.player.equipment as unknown as Record<string, unknown>)[slot] = null;
+      });
+      Trainer.player.equipmentChanged();
+    },
+    /** Equip an inventory item by name (the same code path as clicking it). */
+    equip: (name: string) => {
+      const item = Trainer.player.inventory.find((i) => i && i.itemName === name) as unknown as { inventoryLeftClick: (p: unknown) => void };
+      if (!item) return false;
+      item.inventoryLeftClick(Trainer.player);
+      return true;
+    },
+    /** Empty the last n potion slots so two-handed swaps have room. */
+    freeSlots: (n: number) => {
+      let freed = 0;
+      for (let i = Trainer.player.inventory.length - 1; i >= 0 && freed < n; i--) {
+        const item = Trainer.player.inventory[i] as unknown as { doses?: number } | null;
+        if (item && item.doses !== undefined) {
+          Trainer.player.inventory[i] = null;
+          freed++;
+        }
+      }
+      return freed;
+    },
+    /** Aim at the nearest living monster (auto-attack with the weapon in hand). */
+    attackNearest: () => {
+      const p = Trainer.player;
+      const mobs = selectedRegion.mobs.filter((m) => !m.isDying());
+      mobs.sort((a, b) => Math.hypot(a.location.x - p.location.x, a.location.y - p.location.y) - Math.hypot(b.location.x - p.location.x, b.location.y - p.location.y));
+      if (!mobs.length) return null;
+      p.setAggro(mobs[0]);
+      return String(mobs[0].mobName());
+    },
+    /** Select a barrage for the next cast on the current target (the same as picking it in the spellbook). */
+    selectSpell: (which: "ice" | "blood") => {
+      (Trainer.player as unknown as { manualSpellCastSelection: unknown }).manualSpellCastSelection =
+        which === "blood" ? new BloodBarrageSpell() : new IceBarrageSpell();
+    },
+    clearSpell: () => {
+      (Trainer.player as unknown as { manualSpellCastSelection: unknown }).manualSpellCastSelection = null;
+    },
+    useSpecial: (on: boolean) => {
+      Trainer.player.useSpecialAttack = !!on;
+      Trainer.player.currentStats.specialAttack = 100;
+    },
+    /** Make every monster tough and heal the player, so a smoke test can watch several attacks in a row. */
+    toughen: () => {
+      selectedRegion.mobs.forEach((m) => {
+        m.stats.hitpoint = 5000;
+        m.currentStats.hitpoint = 5000;
+      });
+      Trainer.player.currentStats.hitpoint = Trainer.player.stats.hitpoint;
+    },
+    projectileLog: () => JSON.parse(JSON.stringify(Projectile.debugLog)),
+    graphicLog: () => JSON.parse(JSON.stringify(V3GraphicsLog.graphics)),
+    clearLogs: () => {
+      Projectile.debugLog.length = 0;
+      V3GraphicsLog.graphics.length = 0;
+    },
+  };
+  (window as unknown as { __v3Sim: unknown }).__v3Sim = Object.freeze(hooks);
 }
 V3Shell.addSidebarPaste();
 
