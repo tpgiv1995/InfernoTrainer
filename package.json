@@ -1,11 +1,14 @@
 {
-  "name": "inferno-trainer",
+  "name": "v3-inferno-sim",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "npx webpack serve",
+    "assets": "node scripts/mirror-assets.mjs",
     "build": "webpack",
+    "build:site": "webpack --mode production && node scripts/mirror-assets.mjs",
+    "test": "jest",
     "lint": "eslint . --ext .ts --fix",
     "prettier": "npx prettier --write .",
     "deploy": "wrangler deploy",
@@ -13,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OldSchoolSDK/InfernoTrainer.git"
+    "url": "git+https://github.com/tpgiv1995/InfernoTrainer.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/OldSchoolSDK/InfernoTrainer/issues"
+    "url": "https://github.com/tpgiv1995/InfernoTrainer/issues"
   },
-  "homepage": "https://github.com/OldSchoolSDK/InfernoTrainer#readme",
+  "homepage": "https://github.com/tpgiv1995/InfernoTrainer#readme",
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "@types/lodash": "^4.14.171",
@@ -47,7 +50,10 @@
     "wrangler": "^4.112.0"
   },
   "dependencies": {
-    "osrs-sdk": "0.1.4",
+    "osrs-sdk": "file:vendor/osrs-sdk-a2662b1.tgz",
     "three": "^0.163.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

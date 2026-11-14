@@ -1,37 +1,100 @@
-# Inferno Trainer
+# V3 Inferno Sim
 
-- [Click here to try the Inferno Trainer](https://www.infernotrainer.com/)
-- [Click here to beta test the Inferno Trainer](https://beta.infernotrainer.com/)
-- [Join our Discord](https://discord.gg/Z3ZyY7Yzt5)
+A personal build of the open-source [Inferno Trainer](https://github.com/OldSchoolSDK/InfernoTrainer)
+(OldSchoolSDK, GPL-3.0) with a RuneLite-style interface: one bottom tab row, right-drag camera, F-key
+panels, a fight setup screen, a Try again prompt, and spawn import from Inferno Stats links.
+Live: https://v3-infernosim.netlify.app
 
-## What is this project?
+Gameplay is upstream's, unchanged: the engine is `osrs-sdk` 0.1.4 (the version upstream pins) plus a
+small set of UI-only patches (branch `inferno-v3` of
+[tpgiv1995/osrs-sdk](https://github.com/tpgiv1995/osrs-sdk/tree/inferno-v3)). The built package is
+committed in `vendor/` and referenced with `file:` in `package.json`.
 
-This project stemmed from my interest in Old School Runescape's Inferno, and my desire for an open source, relatively clean re-implementation of the Old School Runescape engine. The underlying code is designed closer to a true game engine compared to any other trainer or simulator. The goal is for there to be a clean, well-defined API between all "Game Content" code and any underlying "Engine" code
+## What is different from upstream
 
-## How do I use it?
+| Area | Behaviour |
+| --- | --- |
+| Setup screen | Opens first. Wave or pasted link, loadout, on task, pillars, Zuk shield, camera sensitivity, fullscreen on start. **Start always begins a fresh reset.** The top-left menu button reopens it. |
+| Controls | F1 combat, F2 inventory, F3 prayer, F4 magic, F5 equipment; the key of the open panel closes it. Right-drag turns the camera (sensitivity setting), a quick right-click opens the menu. |
+| Layout | RuneLite modern layout: a single bottom tab row, larger panel, chat strip. The site sidebar sits behind the gear button. |
+| Prayer | Level 93. The prayer book uses the V3 layout (switch to the stock order on the setup screen). |
+| Death | An overlay offers Try again (Enter). |
+| Spawn import | The URL accepts the Inferno Stats params (`bat`, `blob`, `melee`, `ranger`, `mager`, `copyable`). The setup screen and the sidebar have a "Paste link" box for an infernotrainer.com or infernostats link. |
+| Settings | Everything persists in the browser (the engine's keys plus `v3-inferno-sim:settings`). |
 
-### Pick your own waves
+## Build and run
 
-If you want to practice a wave, click one of the links above. You can type in a wave and it will produce a random spawn, and you can re-play the exact spawn if you wish.
+Node 24 works with no flags (`.nvmrc` pins 24.19.0). Upstream's Node 16 note (an OpenSSL error on newer
+Node) does not apply to this webpack version.
 
-### Practice a wave I failed in-game
+```
+npm ci
+npm test                 # jest: unit tests, golden flows
+npm run build:site       # production build into dist/ plus a mirror of the game assets in dist/cdn/
+node scripts/serve-dist.mjs 8123 dist      # preview at http://127.0.0.1:8123
+```
 
-Alternatively, if you are practicing the Inferno and have the Inferno Stats plugin (Available on RuneLite's Plugin Hub), you can click a wave in the panel and it will load the simulation with the exact spawn. I would recommend you disable the "Hide when outside of the Inferno" feature for when you plank.
+`npm start` runs the webpack dev server on port 8000 (run `npm run assets` once first so `dist/cdn` exists).
 
-## I found a bug!
+### Why `dist/cdn`
 
-Likely. Please open a issue above. Videos, screenshots, proof of OSRS science, etc is appreciated. I want this to be a faithful re-implementation of OSRS and all bugs are appreciated.
+The SDK downloads models and sounds from `oldschool-cdn.com`, which only allows the upstream site's
+origins. `src/index.html` sets `window.OSRS_ASSET_BASE_URL` to `/cdn/` and the vendored SDK honours it;
+`scripts/mirror-assets.mjs` downloads every `Assets.getAssetUrl("...")` path found in this repo and the
+SDK bundle (57 files, about 45 MB). It needs network access and is skipped for files already present.
 
-## Can I contribute?
+## Deploy (Netlify, not git-linked)
 
-Sure. Right now the code is undergoing rapid development and the API is not stable. I am open to pull requests but I suggest you start small and let me talk to you first to make sure we're aligned.
+Site `v3-infernosim`, deployed from a local build:
 
-## Development notes
+```
+npm run build:site
+netlify deploy --prod --dir dist --no-build --site <site id>
+```
 
-Use Node 16 for now. There's an SSL error on version >= 18.
+On Git Bash set `MSYS_NO_PATHCONV=1` if an environment value that looks like a path gets rewritten.
 
-    npm run start
+## Tests
 
-Running test
+- `test/v3/spawnLink.test.ts` - the link parser (three real-shaped links, bad input) and exact mob placement
+  (`x+11, y+14`, plus the three nibblers the site always adds).
+- `test/golden/` - the golden-flow harness (see below).
+- `test/simulations/` - upstream's line-of-sight tests.
 
-    npx jest
+### Golden flows
+
+`test/golden/harness.ts` loads a spawn URL into the real `InfernoRegion` without a browser, plays N ticks with
+a scripted player (stands still, never dies, no prayers) and records every mob's name, tile, hitpoints and attack
+timer per tick, plus the damage the player took. Randomness (`Random` and `Math.random`, including lodash)
+is seeded inside the harness only.
+
+Five flows: an Inferno Stats style link with every mob type and a double blob, native wave 63 on fixed tiles,
+wave 67 (Jad and healers), wave 68 (triple Jad), wave 69 (Zuk, 260 ticks, so sets and healers).
+`test/golden/traces/*.json` were written by running the same harness against **upstream** `beta`
+(commit in `traces/UPSTREAM_COMMIT.txt`, npm `osrs-sdk` 0.1.4), so a green run shows the fork's mob
+behaviour is identical to upstream's. To rewrite them: check out upstream, copy `test/golden/*.ts` and
+`test/setupFiles.ts`, and run `GOLDEN_WRITE=1 npx jest test/golden`.
+
+Covers: mob spawning, movement, targeting, attacks and damage rolls, Jad and healers, Zuk and the shield.
+Does not cover: rendering, sound, the player's own attacks, anything UI.
+
+Browser side-by-side: open the same link on https://www.infernotrainer.com/ and on the fork and compare
+where the mobs stand at the end of "Get ready".
+
+## Rebuilding the vendored SDK
+
+```
+git clone https://github.com/tpgiv1995/osrs-sdk.git && cd osrs-sdk && git checkout inferno-v3
+npm ci && npx jest
+rm -rf _bundles lib lib-esm && npx webpack --config webpack.production.js
+npm pack          # osrs-sdk-0.1.4.tgz
+```
+
+Rename it `vendor/osrs-sdk-<short commit>.tgz`, point `package.json` at it, run `npm install`. Never `npm link`.
+
+## Notes
+
+- Nothing here sends analytics: upstream's Google Analytics and New Relic snippets were removed.
+- This repository is a standalone copy of upstream `beta` (history kept; remote `upstream`), not a GitHub fork,
+  because GitHub maps the owner's existing fork of the sibling Colosseum trainer onto the same fork network.
+- Assets belong to Jagex. This is an unofficial fan tool.

@@ -1,0 +1,7 @@
+* text=auto
+*.tgz binary
+*.png binary
+*.glb binary
+*.ogg binary
+.nvmrc text eol=lf
+test/golden/traces/* text eol=lf

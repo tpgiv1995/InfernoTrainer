@@ -468,8 +468,9 @@ export class InfernoLoadout {
   }
 
   setStats(player: Player) {
-    player.stats.prayer = 99;
-    player.currentStats.prayer = 99;
+    // V3: prayer level 93.
+    player.stats.prayer = 93;
+    player.currentStats.prayer = 93;
     player.stats.defence = 99;
     player.currentStats.defence = 99;
     switch (this.loadoutType) {

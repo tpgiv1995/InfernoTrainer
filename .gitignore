@@ -111,3 +111,6 @@ typings/
 .dev.vars*
 !.dev.vars.example
 !.env.example
+
+# vendored SDK builds are committed on purpose
+!vendor/*.tgz

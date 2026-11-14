@@ -2,17 +2,11 @@
 
 import { Settings, Region, World, Viewport, MapController, TileMarker, Assets, Location, Chrome, ImageLoader, Trainer, ControlPanelController } from "osrs-sdk";
 
-import NewRelicBrowser from "new-relic-browser";
 import { InfernoRegion } from "./content/inferno/js/InfernoRegion";
 import { InfernoSettings } from "./content/inferno/js/InfernoSettings";
+import { V3Shell } from "./v3/V3Shell";
 
 const SpecialAttackBarBackground = Assets.getAssetUrl("assets/images/attackstyles/interface/special_attack_background.png");
-
-declare global {
-  interface Window {
-    newrelic: typeof NewRelicBrowser;
-  }
-}
 
 Settings.readFromStorage();
 InfernoSettings.readFromStorage();
@@ -50,6 +44,9 @@ tileMarkerColor.addEventListener("input", () => {
   Settings.persistToStorage();
 }, false);
 tileMarkerColor.value = Settings.tileMarkerColor;
+
+V3Shell.init({ world });
+V3Shell.addSidebarPaste();
 
 const { player } = selectedRegion.initialiseRegion();
 
@@ -137,17 +134,13 @@ let started = false;
 function checkStart() {
   if (!started && imagesReady && assetsPreloaded) {
     started = true;
-    // Start the engine
-    world.startTicking();
+    // The engine ticks only after the setup screen's Start (or straight away after a setup-driven reload).
+    V3Shell.ready();
   }
 }
 
 /// /////////////////////////////////////////////////////////
 
-window.newrelic.addRelease("inferno-trainer", process.env.COMMIT_REF);
-
 // UI disclaimer
 const topHeaderContainer = document.getElementById("disclaimer_panel");
-topHeaderContainer.innerHTML =
-  'Work in progress.<br />' +
-  topHeaderContainer.innerHTML;
+topHeaderContainer.innerHTML = "Work in progress. Based on the open-source Inferno Trainer.<br />" + topHeaderContainer.innerHTML;
