@@ -147,6 +147,42 @@ if (new URLSearchParams(window.location.search).has("debug")) {
     clearSpell: () => {
       (Trainer.player as unknown as { manualSpellCastSelection: unknown }).manualSpellCastSelection = null;
     },
+    /**
+     * Aim at the farthest (far = true) or nearest living monster within maxRange tiles whose picture is in the open
+     * part of the screen (not under the side panels), so its projectile can be measured in the rendered frame.
+     */
+    attackInView: (maxRange: number, far: boolean) => {
+      const p = Trainer.player;
+      const dist = (m: { location: { x: number; y: number } }) => Math.max(Math.abs(m.location.x - p.location.x), Math.abs(m.location.y - p.location.y));
+      const inView = (m: Parameters<typeof dist>[0]) => {
+        const box = Viewport.viewport.screenBoxOf(m as never);
+        return !!box && box.x + box.w / 2 > 90 && box.x + box.w / 2 < 1100 && box.y + box.h / 2 > 90 && box.y + box.h / 2 < 780;
+      };
+      const mobs = selectedRegion.mobs.filter((m) => !m.isDying() && dist(m) <= maxRange && inView(m));
+      mobs.sort((a, b) => (far ? dist(b) - dist(a) : dist(a) - dist(b)));
+      if (!mobs.length) return null;
+      p.setAggro(mobs[0]);
+      return `${String(mobs[0].mobName())} at ${dist(mobs[0])} tiles`;
+    },
+    /** The player's projectiles currently in flight that draw something: screen point and model source. */
+    playerProjectilePoints: () => {
+      const points: { x: number; y: number; source: string }[] = [];
+      selectedRegion.mobs.forEach((m) => {
+        m.incomingProjectiles.forEach((pr) => {
+          if (pr.from !== Trainer.player || pr.modelSource === "none" || !pr.visible(world.tickPercent)) return;
+          const pt = Viewport.viewport.screenPointOf(pr);
+          if (pt) points.push({ x: pt.x, y: pt.y, source: pr.modelSource });
+        });
+      });
+      return points;
+    },
+    /** Hold the game still (frames keep drawing) so before/after screenshots show the same moment. */
+    freeze: (on: boolean) => {
+      World.debugFreeze = on ? 0.5 : null;
+    },
+    hideProjectiles: (hidden: boolean) => {
+      Projectile.debugHide = !!hidden;
+    },
     useSpecial: (on: boolean) => {
       Trainer.player.useSpecialAttack = !!on;
       Trainer.player.currentStats.specialAttack = 100;

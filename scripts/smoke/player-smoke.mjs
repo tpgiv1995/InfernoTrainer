@@ -75,6 +75,21 @@ async function waitFor(page, expression, timeoutMs, label) {
   }
 }
 
+/** Number of pixels that differ between two same-size frames (inside `box` {x,y,w,h} when given). */
+function differingCount(a, b, box = null) {
+  const pa = PNG.sync.read(a);
+  const pb = PNG.sync.read(b);
+  let differing = 0;
+  for (let y = box ? box.y : 0; y < (box ? box.y + box.h : pa.height); y++) {
+    for (let x = box ? box.x : 0; x < (box ? box.x + box.w : pa.width); x++) {
+      const i = (y * pa.width + x) * 4;
+      const d = Math.abs(pa.data[i] - pb.data[i]) + Math.abs(pa.data[i + 1] - pb.data[i + 1]) + Math.abs(pa.data[i + 2] - pb.data[i + 2]);
+      if (d > 48) differing++;
+    }
+  }
+  return differing;
+}
+
 /** Fraction of pixels in the clip that differ between the frame with the player and the frame without. */
 function differingFraction(withPlayer, withoutPlayer) {
   const a = PNG.sync.read(withPlayer);
@@ -125,10 +140,84 @@ async function checkPlayerRegion(page, state) {
   else note(state, `player region filled (${(fraction * 100).toFixed(0)}% of pixels are the player)`);
 }
 
-async function attackAndCheck(page, state, { special = false, spell = null, expectGraphics, expectAny = null, expectSources }) {
+/**
+ * While a player projectile is in flight, its screen region must change when its model is hidden: that proves the
+ * projectile is actually drawn (a model source that is only configured, not rendered, fails here).
+ */
+async function checkProjectilePixels(page, state, label) {
+  const deadline = Date.now() + 25000;
+  let lastNote = "no projectile in flight";
+  while (Date.now() < deadline) {
+    const points = await page.evaluate(sim("s.playerProjectilePoints()"));
+    if (!points.length) {
+      await sleep(80);
+      continue;
+    }
+    await page.evaluate(sim("s.freeze(true)"));
+    await sleep(150);
+    const frozen = await page.evaluate(sim("s.playerProjectilePoints()"));
+    if (!frozen.length) {
+      await page.evaluate(sim("s.freeze(false)"));
+      await sleep(60);
+      continue; // it landed before the game could be held still
+    }
+    await page.screenshot({ path: join(outDir, `${state}-projectile-frame.png`) });
+    // the player animates on its own clock, so hide the player model for all three frames: only projectiles differ
+    await page.evaluate(sim("s.hidePlayer(true)"));
+    const frame = async (hidden) => {
+      await page.evaluate(sim(`s.hideProjectiles(${hidden})`));
+      await sleep(120);
+      return page.screenshot();
+    };
+    const hidden1 = await frame(true);
+    const shown = await frame(false);
+    const hidden2 = await frame(true);
+    await page.evaluate(sim("s.hideProjectiles(false)"));
+    await page.evaluate(sim("s.hidePlayer(false)"));
+    await page.evaluate(sim("s.freeze(false)"));
+    // measure the region around each projectile in flight; the best one is the verdict
+    let best = null;
+    for (const pt of frozen) {
+      const half = 30;
+      const x0 = Math.max(0, Math.round(pt.x - half));
+      const y0 = Math.max(0, Math.round(pt.y - half));
+      const box = { x: x0, y: y0, w: Math.min(1440 - x0, half * 2), h: Math.min(900 - y0, half * 2) };
+      if (box.w < 20 || box.h < 20) continue;
+      const result = { pt, signal: differingCount(shown, hidden1, box), noise: differingCount(hidden1, hidden2, box) };
+      if (!best || result.signal - result.noise > best.signal - best.noise) best = result;
+    }
+    if (!best) {
+      lastNote = "every projectile was off screen";
+      await sleep(80);
+      continue;
+    }
+    const { signal, noise, pt } = best;
+    lastNote = `${label}: ${signal} pixels change around the projectile at ${Math.round(pt.x)},${Math.round(pt.y)} with it drawn vs hidden (noise ${noise}, source ${pt.source}, ${frozen.length} in flight)`;
+    const crop = (png, size = 3) => {
+      const clip = PNG.sync.read(png);
+      const x0 = Math.max(0, Math.round(pt.x - 60)), y0 = Math.max(0, Math.round(pt.y - 60));
+      const w = Math.min(120, clip.width - x0), h = Math.min(120, clip.height - y0);
+      const out = new PNG({ width: w, height: h });
+      PNG.bitblt(clip, out, x0, y0, w, h, 0, 0);
+      return cropFile(PNG.sync.write(out), size);
+    };
+    writeFileSync(join(outDir, `${state}-projectile-shown.png`), crop(shown));
+    writeFileSync(join(outDir, `${state}-projectile-hidden.png`), crop(hidden1));
+    if (signal >= Math.max(30, noise * 2 + 15)) {
+      note(state, lastNote);
+      return true;
+    }
+    fail(state, `projectile not visible on screen: ${lastNote}`);
+    return false;
+  }
+  fail(state, `could not measure a projectile in flight (${lastNote})`);
+  return false;
+}
+
+async function attackAndCheck(page, state, { special = false, spell = null, expectGraphics, expectAny = null, expectSources, farthest = 0, projectilePixels = false }) {
   await page.evaluate(sim("s.clearLogs()"));
   await page.evaluate(sim("s.toughen()"));
-  const target = await page.evaluate(sim("s.attackNearest()"));
+  const target = await page.evaluate(sim(projectilePixels ? `s.attackInView(${farthest || 12}, ${farthest ? "true" : "false"})` : "s.attackNearest()"));
   if (!target) return fail(state, "no monster to attack");
   // (choosing a target resets a pending spell selection, so select after)
   if (special) await page.evaluate(sim("s.useSpecial(true)"));
@@ -141,6 +230,7 @@ async function attackAndCheck(page, state, { special = false, spell = null, expe
     }
     await page.evaluate(sim("s.clearSpell()")); // never leave a manual cast pending for the next state
   }
+  if (projectilePixels) await checkProjectilePixels(page, state, farthest ? `long shot (${target})` : `shot at ${target}`);
   const needed = expectGraphics;
   try {
     await waitFor(
@@ -238,7 +328,7 @@ async function main() {
     await page.evaluate(sim("s.equip('Eye of Ayak')"));
     await sleep(2000);
     await checkPlayerRegion(page, "eye");
-    await attackAndCheck(page, "eye", { expectGraphics: [3366, 3368], expectSources: ["cache"] });
+    await attackAndCheck(page, "eye", { expectGraphics: [3366, 3368], expectSources: ["cache"], projectilePixels: true });
     await attackAndCheck(page, "eye-soul-rend", { special: true, expectGraphics: [3364, 3365], expectSources: ["none"] });
 
     // 3. Bow of Faerdhinen with the crystal set
@@ -248,13 +338,13 @@ async function main() {
     }
     await sleep(2000);
     await checkPlayerRegion(page, "bowfa");
-    await attackAndCheck(page, "bowfa", { expectGraphics: [1927], expectSources: ["cache"] });
+    await attackAndCheck(page, "bowfa", { expectGraphics: [1927], expectSources: ["cache"], farthest: 10, projectilePixels: true });
 
     // 4. Toxic blowpipe
     await page.evaluate(sim("s.equip('Toxic Blowpipe')"));
     await sleep(2000);
     await checkPlayerRegion(page, "blowpipe");
-    await attackAndCheck(page, "blowpipe", { expectGraphics: [], expectSources: ["gltf"] });
+    await attackAndCheck(page, "blowpipe", { expectGraphics: [], expectSources: ["gltf"], projectilePixels: true });
 
     // 5. unequipped body: nothing worn, the default body must still be on screen
     await page.evaluate(sim("s.unequip(['helmet','necklace','cape','chest','legs','feet','gloves','ring','ammo','weapon','offhand'])"));
