@@ -26,7 +26,6 @@ import {
   DagonhaiRobeTop,
   DevoutBoots,
   DiamondBoltsE,
-  DivineRangingPotion,
   DizanasQuiver,
   DragonArrows,
   EyeOfAyak,
@@ -57,6 +56,7 @@ import {
   PrimordialBoots,
   RadasBlessing4,
   RangerBoots,
+  RangingPotion,
   RingOfSufferingImbued,
   RobinHoodHat,
   RubyBoltsE,
@@ -515,7 +515,7 @@ export class InfernoLoadout {
         new PrayerRegenerationPotion(),
         new PrayerRegenerationPotion(),
         new PrayerRegenerationPotion(),
-        new DivineRangingPotion(),
+        new RangingPotion(),
       ],
     };
   }

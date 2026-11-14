@@ -66,7 +66,8 @@ describe("V3 Inferno loadout", () => {
     expect(count("Saradomin Brew")).toBe(7);
     expect(count("Super Restore")).toBe(7);
     expect(count("Prayer regeneration potion")).toBe(3);
-    expect(count("Divine ranging potion")).toBe(1);
+    expect(count("Ranging potion")).toBe(1);
+    expect(count("Divine ranging potion")).toBe(0);
     expect(count("Bastion Potion")).toBe(0);
     ["Bow of faerdhinen", "Crystal Helm", "Crystal Body", "Crystal Legs", "Dizana's Quiver", "Necklace of rupture",
       "Toxic Blowpipe", "Eye of Ayak", "Saturated heart", "Rune pouch"].forEach((n) => expect(count(n)).toBe(1));
