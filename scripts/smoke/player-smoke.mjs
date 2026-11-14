@@ -5,7 +5,7 @@
 // Bow of Faerdhinen set, Toxic blowpipe, and an unequipped body) it:
 //   1. measures the player's screen region by drawing the frame with and without the player model and failing
 //      when the two frames do not differ there (an empty player region), and
-//   2. attacks the nearest monster and fails if any player projectile used the coloured-sphere fallback, or if the
+//   2. attacks a visible monster (the farthest visible one for the BowFa) and fails if any player projectile used the coloured-sphere fallback, or if the
 //      real graphics for that weapon never appeared (the BowFa launch glow, the Eye normal and Soul Rend graphics,
 //      the Ice and Blood Barrage impacts).
 // Screenshots go to test-results/smoke/ (full frame plus a 4x crop of the player for each state).
