@@ -98,8 +98,10 @@ It cold-loads wave 1, waits for the cache-rendered player, then for the tank set
 the Bow of Faerdhinen set, the Toxic blowpipe and an unequipped body it (1) draws the frame with and without the
 player model and fails if the player's screen region does not change (an empty player region), and (2) attacks the
 nearest monster and fails if any projectile used the coloured-sphere fallback, or if the real graphics for that weapon
-(BowFa launch glow, Eye normal and Soul Rend graphics, Ice and Blood Barrage impacts) never appeared. It exits non-zero
-on any failure and writes screenshots and effect crops to `test-results/smoke/`.
+(BowFa launch glow, Eye normal and Soul Rend graphics, Ice and Blood Barrage impacts) never appeared. (3) For the
+BowFa arrow, the Eye projectile and the blowpipe dart it holds the game still while the projectile is in flight, takes
+the frame with and without projectiles drawn, and fails if the region around the projectile does not change (a
+projectile that is configured but never actually drawn). It exits non-zero on any failure and writes screenshots and effect crops to `test-results/smoke/`.
 
 ```
 npm run build:site     # the test serves ./dist
