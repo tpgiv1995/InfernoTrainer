@@ -487,35 +487,38 @@ export class InfernoLoadout {
         gloves: new ConflictionGauntlets(),
         ring: new MagusRing(),
       },
+      // The 28 slots in the saved "Inferno v2" setup's order (goals/inferno-v2-inventory-setup.txt, "inv", slot 1 first):
+      // item ids 25886, 27721, 28951, 27729, 12926, 33639, 27725, 6685, 30125, 3024 x7, 2444, 30125, 6685 x6, 30125,
+      // 31113, 27641, 27509.
       inventory: [
-        new BowOfFaerdhinen(),
-        new CrystalHelm(),
-        new CrystalBody(),
-        new CrystalLegs(),
-        new DizanasQuiver(),
-        new NecklaceOfRupture(),
-        new Blowpipe(),
-        new EyeOfAyak(),
-        new SaturatedHeart(),
-        new DivineRunePouch(),
-        new SaradominBrew(),
-        new SaradominBrew(),
-        new SaradominBrew(),
-        new SaradominBrew(),
+        new BowOfFaerdhinen(), // 25886
+        new CrystalBody(), // 27721
+        new DizanasQuiver(), // 28951
+        new CrystalHelm(), // 27729
+        new Blowpipe(), // 12926
+        new NecklaceOfRupture(), // 33639
+        new CrystalLegs(), // 27725
+        new SaradominBrew(), // 6685
+        new PrayerRegenerationPotion(), // 30125
+        new SuperRestore(), // 3024 x7 (slots 10-16)
         new SuperRestore(),
         new SuperRestore(),
         new SuperRestore(),
         new SuperRestore(),
+        new SuperRestore(),
+        new SuperRestore(),
+        new RangingPotion(), // 2444
+        new PrayerRegenerationPotion(), // 30125
+        new SaradominBrew(), // 6685 x6 (slots 19-24)
         new SaradominBrew(),
         new SaradominBrew(),
         new SaradominBrew(),
-        new SuperRestore(),
-        new SuperRestore(),
-        new SuperRestore(),
-        new PrayerRegenerationPotion(),
-        new PrayerRegenerationPotion(),
-        new PrayerRegenerationPotion(),
-        new RangingPotion(),
+        new SaradominBrew(),
+        new SaradominBrew(),
+        new PrayerRegenerationPotion(), // 30125
+        new EyeOfAyak(), // 31113
+        new SaturatedHeart(), // 27641
+        new DivineRunePouch(), // 27509
       ],
     };
   }

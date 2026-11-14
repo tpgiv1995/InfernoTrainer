@@ -72,6 +72,19 @@ describe("V3 Inferno loadout", () => {
     ["Bow of faerdhinen", "Crystal Helm", "Crystal Body", "Crystal Legs", "Dizana's Quiver", "Necklace of rupture",
       "Toxic Blowpipe", "Eye of Ayak", "Saturated heart", "Divine rune pouch (l)"].forEach((n) => expect(count(n)).toBe(1));
     expect(inv).not.toContain("Armadyl brew");
+    // all 28 slots in the saved setup's order (item ids from goals/inferno-v2-inventory-setup.txt, slot 1 first)
+    const SAVED_SLOTS: [number, string][] = [
+      [25886, "Bow of faerdhinen"], [27721, "Crystal Body"], [28951, "Dizana's Quiver"], [27729, "Crystal Helm"],
+      [12926, "Toxic Blowpipe"], [33639, "Necklace of rupture"], [27725, "Crystal Legs"], [6685, "Saradomin Brew"],
+      [30125, "Prayer regeneration potion"],
+      ...Array.from({ length: 7 }, (): [number, string] => [3024, "Super Restore"]),
+      [2444, "Ranging potion"], [30125, "Prayer regeneration potion"],
+      ...Array.from({ length: 6 }, (): [number, string] => [6685, "Saradomin Brew"]),
+      [30125, "Prayer regeneration potion"], [31113, "Eye of Ayak"], [27641, "Saturated heart"],
+      [27509, "Divine rune pouch (l)"],
+    ];
+    expect(SAVED_SLOTS).toHaveLength(28);
+    expect(player.inventory.map((i) => (i ? i.itemName : null))).toEqual(SAVED_SLOTS.map(([, name]) => name));
     expect(player.stats.prayer).toBe(93);
     expect(player.stats.magic).toBe(99);
   });

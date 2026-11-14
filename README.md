@@ -63,24 +63,28 @@ On Git Bash set `MSYS_NO_PATHCONV=1` if an environment value that looks like a p
 
 ### Golden flows
 
-`test/golden/harness.ts` loads a spawn URL into the real `InfernoRegion` without a browser, plays N ticks with
-a scripted player (stands still, never dies, no prayers, never attacks) and records every mob's name, tile,
-hitpoints and attack timer per tick, plus the damage the player took. Randomness (`Random` and `Math.random`, including lodash)
-is seeded inside the harness only.
+`test/golden/harness.ts` loads a spawn URL into the real `InfernoRegion` without a browser and plays N ticks
+with a scripted player that gives no commands: it does not move, pray, pick a target or use items, and it is
+topped back up to full Hitpoints after every tick so it never dies. Each tick the harness records every mob's
+name, tile, hitpoints and attack timer, plus the damage the player took that tick. Randomness (`Random` and
+`Math.random`, including lodash) is seeded inside the harness only.
 
-Five flows: an Inferno Stats style link with every mob type and a double blob, native wave 63 on fixed tiles,
-wave 67 (Jad and healers), wave 68 (triple Jad), wave 69 (Zuk, 260 ticks, so sets and healers).
-`test/golden/traces/*.json` were written by running the same harness against **upstream** `beta`
-(commit in `traces/UPSTREAM_COMMIT.txt`, npm `osrs-sdk` 0.1.4), so a green run shows that, for these
-scenarios and the recorded fields, the fork's mobs spawn, move and time their attacks the way upstream's do. To rewrite them: check out upstream, copy `test/golden/*.ts` and
-`test/setupFiles.ts`, and run `GOLDEN_WRITE=1 npx jest test/golden`.
+Five flows: an Inferno Stats style link with every mob type and a double blob; native wave 63 on fixed tiles;
+wave 67 (Jad only, 100 ticks, no healers recorded); wave 68 (triple Jad); wave 69 (Zuk, his shield and his first
+set only, 260 ticks; no healers recorded). `test/golden/traces/*.json` were written by running the same harness
+against **upstream** `beta` (commit in `traces/UPSTREAM_COMMIT.txt`, npm `osrs-sdk` 0.1.4), so a green run shows
+that, for these scenarios and the recorded fields, the fork's mobs spawn, move and time their attacks the way
+upstream's do. To rewrite them: check out upstream, copy `test/golden/*.ts` and `test/setupFiles.ts`, and run
+`GOLDEN_WRITE=1 npx jest test/golden`.
 
-Covers (what the traces record): mob spawn tiles, movement, hitpoints, attack timers and the damage the unprotected
-scripted player takes, in upstream's legacy rules (`V3Rules.calculator = false`; the V3 rules change player and
-monster combat numbers on purpose and have their own tests).
-Does not cover: Jad healers, Zuk's healers and shield (wave 69 never takes Zuk below 1,118 HP, so no HP threshold
-is reached), the player's own attacks, targeting, prayers, projectiles, rendering, sound, UI. Legacy mode matches
-upstream's combat formulas and loadout behaviour; it is not a claim about the whole SDK.
+What is compared, tick by tick: for every mob present (including Zuk and the Inferno Shield while it exists), its
+name, tile (x, y), current hitpoints and attack delay; and the damage the scripted player took. For the shield
+that means its position along the wall, its hitpoints (600 down to 0 when it breaks) and its attack timer. The
+runs are in upstream's legacy rules (`V3Rules.calculator = false`); the V3 rules change player and monster combat
+numbers on purpose and have their own tests.
+
+Not compared: Jad healers and Zuk's healers (neither flow reaches them), the player's own attacks and targeting,
+prayers, projectiles in flight, rendering, sound and UI. This is not a claim about the whole SDK.
 
 Browser side-by-side: open the same link on https://www.infernotrainer.com/ and on the fork and compare
 where the mobs stand at the end of "Get ready".
