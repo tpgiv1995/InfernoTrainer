@@ -46,6 +46,9 @@ tileMarkerColor.addEventListener("input", () => {
 tileMarkerColor.value = Settings.tileMarkerColor;
 
 V3Shell.init({ world });
+
+// Read access for live checks (browser automation): the current player and the world.
+(window as unknown as { __v3Sim: unknown }).__v3Sim = { player: () => Trainer.player, world };
 V3Shell.addSidebarPaste();
 
 const { player } = selectedRegion.initialiseRegion();
